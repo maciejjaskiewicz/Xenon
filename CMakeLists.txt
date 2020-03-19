@@ -9,7 +9,7 @@ else()
     include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 endif()
 
-conan_basic_setup()
+conan_basic_setup(TARGETS)
 
 # configure CMake module path and include macros
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
@@ -28,7 +28,7 @@ endif()
 
 option(XENON_BUILD_SHARED "Build Xenon as a shared library" ON)
 option(XENON_BUILD_EXAMPLES "Build the Xenon example programs" ${XENON_STANDALONE})
-# option(XENON_BUILD_TESTS "Build the Xenon test programs" ${XENON_STANDALONE})
+option(XENON_BUILD_TESTS "Build the Xenon test programs" ${XENON_STANDALONE})
 
 # enable project folders
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -58,4 +58,10 @@ add_subdirectory(src)
 # add sample executables
 if (XENON_BUILD_EXAMPLES)
     add_subdirectory(examples)
+endif()
+
+if (XENON_BUILD_TESTS)
+    include(Catch)
+    enable_testing()
+    add_subdirectory(tests)
 endif()
