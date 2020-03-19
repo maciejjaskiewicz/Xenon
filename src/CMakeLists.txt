@@ -27,5 +27,14 @@ endif()
 
 add_library(Xenon::Engine ALIAS Xenon)
 
+# link third party libraries
+conan_target_link_libraries(Xenon)
+
+# set include directories
 target_include_directories(Xenon PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories(Xenon PRIVATE ${PROJECT_SOURCE_DIR}/include/Xenon)
+
+# disable PDBs warning for MSVC
+if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    set_target_properties(Xenon PROPERTIES LINK_FLAGS "/ignore:4099")
+endif()

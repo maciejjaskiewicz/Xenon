@@ -1,6 +1,15 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.14)
 
 project(Xenon CXX)
+
+# configure Conan
+if(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)
+    include(${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)
+else()
+    include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+endif()
+
+conan_basic_setup()
 
 # configure CMake module path and include macros
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
