@@ -1,28 +1,27 @@
 set(XN_INCROOT ${PROJECT_SOURCE_DIR}/include/Xenon)
 set(XN_SRCROOT ${PROJECT_SOURCE_DIR}/src)
 
+add_subdirectory(Core)
+
 set (XN_INCLUDES
     ${XN_INCROOT}/Core.hpp
     ${XN_INCROOT}/Xenon.hpp
 )
 
-set (XN_CORE
-    ${XN_INCROOT}/Core/Api.hpp
-    ${XN_SRCROOT}/Core/Application.cpp
-    ${XN_INCROOT}/Core/Application.hpp
-    ${XN_INCROOT}/Core/Platform.hpp
+set (XN_SOURCES
+    ${XN_SOURCES_CORE}
 )
 
 source_group("" FILES ${XN_INCLUDES})
-source_group("Core" FILES ${XN_CORE})
+source_group("Core" FILES ${XN_SOURCES_CORE})
 
 # create library
 if (XENON_BUILD_SHARED)
-    add_library(Xenon SHARED ${XN_INCLUDES} ${XN_CORE})
+    add_library(Xenon SHARED ${XN_INCLUDES} ${XN_SOURCES})
     target_compile_definitions(Xenon PUBLIC XN_BUILD_SHARED)
     target_compile_definitions(Xenon PRIVATE XN_SHARED_EXPORTS)
 else()
-    add_library(Xenon STATIC ${XN_INCLUDES} ${XN_CORE})
+    add_library(Xenon STATIC ${XN_INCLUDES} ${XN_SOURCES})
 endif()
 
 add_library(Xenon::Engine ALIAS Xenon)
@@ -33,6 +32,11 @@ conan_target_link_libraries(Xenon)
 # set include directories
 target_include_directories(Xenon PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories(Xenon PRIVATE ${PROJECT_SOURCE_DIR}/include/Xenon)
+
+# set extra definitions
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_definitions(Xenon PUBLIC XN_DEBUG)
+endif()
 
 # disable PDBs warning for MSVC
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")

@@ -12,6 +12,7 @@
 
 # Build directory
 [Bb]uild/
+[Cc]make-build*/
 
 # Build results
 [Dd]ebug/
