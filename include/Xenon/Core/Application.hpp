@@ -7,7 +7,7 @@ namespace Xenon
     class XN_API Application
     {
     public:
-        Application();
+        explicit Application();
         virtual ~Application();
 
         void run();

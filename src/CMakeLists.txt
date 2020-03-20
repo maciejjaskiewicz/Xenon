@@ -2,18 +2,22 @@ set(XN_INCROOT ${PROJECT_SOURCE_DIR}/include/Xenon)
 set(XN_SRCROOT ${PROJECT_SOURCE_DIR}/src)
 
 add_subdirectory(Core)
+add_subdirectory(Utils)
 
 set (XN_INCLUDES
     ${XN_INCROOT}/Core.hpp
     ${XN_INCROOT}/Xenon.hpp
+    ${XN_INCROOT}/Utils.hpp
 )
 
 set (XN_SOURCES
     ${XN_SOURCES_CORE}
+    ${XN_SOURCES_UTILS}
 )
 
 source_group("" FILES ${XN_INCLUDES})
 source_group("Core" FILES ${XN_SOURCES_CORE})
+source_group("Utils" FILES ${XN_SOURCES_UTILS})
 
 # create library
 if (XENON_BUILD_SHARED)
