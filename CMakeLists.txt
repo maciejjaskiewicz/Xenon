@@ -61,7 +61,7 @@ if (XENON_BUILD_EXAMPLES)
 endif()
 
 if (XENON_BUILD_TESTS)
-    include(Catch)
+    include(GoogleTest)
     enable_testing()
     add_subdirectory(tests)
 endif()

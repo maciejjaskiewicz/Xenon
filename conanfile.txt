@@ -1,6 +1,6 @@
 [requires]
 spdlog/1.5.0
-catch2/2.11.1
+gtest/1.10.0
 
 [generators]
 cmake
