@@ -15,7 +15,6 @@
 #endif
 
 #ifdef XN_ENABLE_ASSERTS
-    // TODO: replace spdlog::critical with a Xenon error macro
     #define XN_ASSERT(x) { if(!(x)) { spdlog::critical("Assertion Failed"); DEBUG_BREAK; } }
     #define XN_ASSERT_COM(x, comment) { if(!(x)) { spdlog::critical("Assertion Failed: {}", comment); DEBUG_BREAK; } }
     #define XN_ASSERT_FMT(x, fmt, ...) { if(!(x)) { spdlog::critical(std::string("Assertion Failed: ") + fmt, __VA_ARGS__); DEBUG_BREAK; } }

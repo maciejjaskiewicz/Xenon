@@ -1,9 +1,22 @@
 #include <Xenon/Xenon.hpp>
 
-int main()
+class Sandbox final : public Xenon::Application
 {
-    Xenon::Application app{};
-    app.run();
+public:
+    Sandbox()
+    {
+        logger().info("Client test");
+    }
+};
+XN_REGISTER_APPLICATION(Sandbox);
 
-    return 0;
+void Xenon::configureApplication(IApplicationBuilder<Sandbox>& applicationBuilder)
+{
+    applicationBuilder.configureApplicationLogger(
+        [](ApplicationLoggerConfiguration& cfg)
+    {
+        cfg.setLabel("Sandbox");
+        cfg.useConsoleLogger();
+        cfg.useFileLogger("Sandbox.log", true);
+    });
 }

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../Core/Assert.hpp"
-
 #include <memory>
 #include <stdexcept>
 

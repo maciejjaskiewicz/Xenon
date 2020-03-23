@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Core/Assert.hpp"
-#include "../Core/Api.hpp"
 
 #include <memory>
 
@@ -20,7 +19,7 @@ namespace Xenon
         ~ImmutableServiceLocator() = delete;
 
         static void set(std::shared_ptr<TService> servicePtr)
-        {
+{
             XN_ASSERT_COM(servicePtr, "Service pointer cannot be null");
             XN_ASSERT_COM(empty(), "Already initialized");
 

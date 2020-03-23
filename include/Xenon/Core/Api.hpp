@@ -36,3 +36,4 @@
     #define XN_API
     #define XN_LOCAL
 #endif
+

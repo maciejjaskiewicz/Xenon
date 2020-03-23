@@ -3,9 +3,15 @@ set(XN_SRCROOT ${PROJECT_SOURCE_DIR}/src/Core)
 
 set (XN_SOURCES_CORE
     ${XN_INCROOT}/Api.hpp
+    ${XN_INCROOT}/Log.hpp
     ${XN_INCROOT}/Assert.hpp
+    ${XN_INCROOT}/Main.hpp
+    ${XN_INCROOT}/Platform.hpp
     ${XN_SRCROOT}/Application.cpp
     ${XN_INCROOT}/Application.hpp
-    ${XN_INCROOT}/Platform.hpp
+    ${XN_SRCROOT}/InternalApplicationServices.hpp
+    ${XN_INCROOT}/ApplicationBuilder.hpp
+    ${XN_INCROOT}/Initializer.hpp
+    ${XN_SRCROOT}/Initializer.cpp
     PARENT_SCOPE
 )

@@ -1,0 +1,10 @@
+project(CustomMain)
+
+set (CUSTOM_MAIN_SOURCES
+    src/CustomMain.cpp
+)
+
+add_executable(CustomMain ${CUSTOM_MAIN_SOURCES})
+target_link_libraries(CustomMain Xenon::Engine)
+
+set_target_properties(CustomMain PROPERTIES FOLDER Examples)
