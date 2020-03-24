@@ -5,7 +5,8 @@ class Sandbox final : public Xenon::Application
 public:
     Sandbox()
     {
-        logger().info("Client test");
+        XN_INFO("{} initialized", "Sandbox");
+        Services::AppLogger::ref().warn("Static test");
     }
 };
 XN_REGISTER_APPLICATION(Sandbox);

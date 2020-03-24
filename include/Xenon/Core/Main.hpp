@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Api.hpp"
 #include "ApplicationBuilder.hpp"
 
 #include <memory>
@@ -12,7 +11,7 @@
                                                                                             \
     namespace Xenon                                                                         \
     {                                                                                       \
-        extern XN_LOCAL void configureApplication(AppBuilder& applicationBuilder);          \
+        extern void configureApplication(AppBuilder& applicationBuilder);                   \
     }                                                                                       \
                                                                                             \
     int main(int argc, char** argv)                                                         \

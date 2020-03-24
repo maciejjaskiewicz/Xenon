@@ -13,7 +13,7 @@ namespace Xenon
     struct InternalApplicationServices
     {
         using App = ImmutableServiceLocator<Application>;
-        using InterLogger = ImmutableServiceLocator<Logger>;
+        using Log = ImmutableServiceLocator<Logger>;
 
         struct LogSinks
         {
@@ -24,7 +24,7 @@ namespace Xenon
         static void assertIsInitialized()
         {
             App::assertIsNotEmpty();
-            InterLogger::assertIsNotEmpty();
+            Log::assertIsNotEmpty();
 
             XN_ASSERT_COM(!LogSinks::Console::empty(), "Uninitialized");
             XN_ASSERT_COM(!LogSinks::File::empty(), "Uninitialized");

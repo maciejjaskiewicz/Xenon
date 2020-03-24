@@ -6,7 +6,7 @@ class Custom final : public Xenon::Application
 public:
     Custom()
     {
-        logger().info("Client test");
+        Services::AppLogger::ref().info("Client test");
     }
 };
 

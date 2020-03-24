@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Api.hpp"
 #include "../Services/Log/ApplicationLoggerConfiguration.hpp"
 #include <memory>
 
@@ -11,7 +10,7 @@ namespace Xenon
 
 namespace Xenon
 {
-    struct XN_API Initializer
+    struct Initializer
     {
         inline static bool initialized = false;
 

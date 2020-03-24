@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Core/Api.hpp"
 #include "Core/Log.hpp"
 #include "Core/Assert.hpp"
 #include "Core/Platform.hpp"

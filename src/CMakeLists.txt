@@ -24,14 +24,7 @@ source_group("Utils" FILES ${XN_SOURCES_UTILS})
 source_group("Services\\Log" FILES ${XN_SOURCES_SERVICES_LOG})
 
 # create library
-if (XENON_BUILD_SHARED)
-    add_library(Xenon SHARED ${XN_INCLUDES} ${XN_SOURCES})
-    target_compile_definitions(Xenon PUBLIC XN_BUILD_SHARED)
-    target_compile_definitions(Xenon PRIVATE XN_SHARED_EXPORTS)
-else()
-    add_library(Xenon STATIC ${XN_INCLUDES} ${XN_SOURCES})
-endif()
-
+add_library(Xenon STATIC ${XN_INCLUDES} ${XN_SOURCES})
 add_library(Xenon::Engine ALIAS Xenon)
 
 # link third party libraries
@@ -43,7 +36,7 @@ target_include_directories(Xenon PRIVATE ${PROJECT_SOURCE_DIR}/include/Xenon)
 
 # set extra definitions
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_definitions(Xenon PUBLIC XN_DEBUG)
+    target_compile_definitions(Xenon PUBLIC XN_MODE_DEBUG)
 endif()
 
 # disable PDBs warning for MSVC

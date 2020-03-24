@@ -2,7 +2,6 @@ set(XN_INCROOT ${PROJECT_SOURCE_DIR}/include/Xenon/Core)
 set(XN_SRCROOT ${PROJECT_SOURCE_DIR}/src/Core)
 
 set (XN_SOURCES_CORE
-    ${XN_INCROOT}/Api.hpp
     ${XN_INCROOT}/Log.hpp
     ${XN_INCROOT}/Assert.hpp
     ${XN_INCROOT}/Main.hpp

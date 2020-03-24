@@ -10,6 +10,11 @@ namespace Xenon
 
     void Application::run()
     {
-        XN_INTERNAL_INFO("{} Engine test", "Xenon");
+        XN_ENG_INFO("{} Engine test", "Xenon");
+    }
+
+    void Application::Services::assertIsInitialized()
+    {
+        XN_ASSERT_COM(!AppLogger::empty(), "Uninitialized");
     }
 }

@@ -26,7 +26,6 @@ if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
     set(XENON_STANDALONE TRUE)
 endif()
 
-option(XENON_BUILD_SHARED "Build Xenon as a shared library" ON)
 option(XENON_BUILD_EXAMPLES "Build the Xenon example programs" ${XENON_STANDALONE})
 option(XENON_BUILD_TESTS "Build the Xenon test programs" ${XENON_STANDALONE})
 

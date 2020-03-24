@@ -20,6 +20,7 @@ namespace Xenon
         initializeLogging(logCfg);
 
         initialized = true;
+        XN_ENG_INFO("Xenon initialized successfully");
     }
 
     void Initializer::registerApplication(const std::shared_ptr<Application>& application)
@@ -36,9 +37,9 @@ namespace Xenon
     void Initializer::initializeLogging(const ApplicationLoggerConfiguration& logCfg)
     {
         using LogSinks = InternalApplicationServices::LogSinks;
-        using XenonLogger = InternalApplicationServices::InterLogger;
+        using XenonLogger = InternalApplicationServices::Log;
 
-        // Init logging
+        // Init sinks
         LogSinks::Console::createAndSet<NullConsoleLogSink>();
         LogSinks::Console::createAndSet<NullConsoleLogSink>();
 
@@ -57,13 +58,14 @@ namespace Xenon
             );
         }
 
+        // Xenon logger
         const auto xenonLogger = std::make_shared<Logger>("Xenon");
         XenonLogger::set(xenonLogger);
-
         auto internalLogger = reinterpret_cast<IInternalLogger*>(xenonLogger->mImpl.get());
         spdlog::set_default_logger(internalLogger->getInternal());
 
+        // Client logger
         const auto clientLogger = std::make_shared<Logger>(logCfg.getLabel());
-        Application::Services::ClientLogger::set(clientLogger);
+        Application::Services::AppLogger::set(clientLogger);
     }
 }
