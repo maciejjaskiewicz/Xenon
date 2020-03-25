@@ -2,6 +2,7 @@
 
 #include "../Utils/ServiceLocator.hpp"
 #include "../Services/Log/Logger.hpp"
+#include "Window.hpp"
 
 namespace Xenon
 {
@@ -10,7 +11,7 @@ namespace Xenon
     public:
         virtual ~Application();
 
-        void run();
+        void run() const;
 
         Application(const Application&) = delete;
         Application(Application&&) = delete;
@@ -28,6 +29,9 @@ namespace Xenon
         explicit Application();
 
     private:
+        std::unique_ptr<Window> mWindow;
+        bool mRunning{ true };
+
         template<typename> friend class ApplicationBuilder;
     };
 }

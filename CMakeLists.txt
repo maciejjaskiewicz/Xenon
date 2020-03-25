@@ -51,6 +51,12 @@ endif()
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# fetch and configure third party libraries
+include(FetchContent)
+SET(FETCHCONTENT_QUIET OFF)
+
+include(FetchGLFW)
+
 # add src
 add_subdirectory(src)
 

@@ -1,6 +1,11 @@
 [requires]
 spdlog/1.5.0
 gtest/1.10.0
+glad/0.1.33
 
 [generators]
 cmake
+
+[options]
+glad:gl_profile=core
+glad:gl_version=4.1

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Xenon/Core/Application.hpp>
+#include "Application.hpp"
 #include "../Services/Log/Logger.hpp"
 #include <spdlog/spdlog.h>
 

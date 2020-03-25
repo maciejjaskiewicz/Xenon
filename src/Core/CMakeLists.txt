@@ -10,7 +10,9 @@ set (XN_SOURCES_CORE
     ${XN_INCROOT}/Application.hpp
     ${XN_SRCROOT}/InternalApplicationServices.hpp
     ${XN_INCROOT}/ApplicationBuilder.hpp
-    ${XN_INCROOT}/Initializer.hpp
     ${XN_SRCROOT}/Initializer.cpp
+    ${XN_INCROOT}/Initializer.hpp
+    ${XN_SRCROOT}/Window.cpp
+    ${XN_INCROOT}/Window.hpp
     PARENT_SCOPE
 )

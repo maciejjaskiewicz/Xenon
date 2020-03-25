@@ -4,13 +4,22 @@
 
 namespace Xenon
 {
-    Application::Application() = default;
+    Application::Application()
+    {
+        mWindow = std::make_unique<Window>();
+    }
 
     Application::~Application() = default;
 
-    void Application::run()
+    void Application::run() const
     {
-        XN_ENG_INFO("{} Engine test", "Xenon");
+        while (mRunning)
+        {
+            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
+
+            mWindow->onUpdate();
+        }
     }
 
     void Application::Services::assertIsInitialized()

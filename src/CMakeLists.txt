@@ -28,6 +28,10 @@ add_library(Xenon STATIC ${XN_INCLUDES} ${XN_SOURCES})
 add_library(Xenon::Engine ALIAS Xenon)
 
 # link third party libraries
+find_package(OpenGL REQUIRED)
+
+target_link_libraries(Xenon OpenGL::GL)
+target_link_libraries(Xenon glfw)
 conan_target_link_libraries(Xenon)
 
 # set include directories
