@@ -6,3 +6,4 @@
 #include "Core/Main.hpp"
 #include "Core/Application.hpp"
 #include "Core/ApplicationBuilder.hpp"
+#include "Core/Window.hpp"

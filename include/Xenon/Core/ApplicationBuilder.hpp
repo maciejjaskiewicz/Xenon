@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Initializer.hpp"
-#include "../Services/Log/ApplicationLoggerConfiguration.hpp"
+#include "../Config.hpp"
 
 #include <memory>
 #include <functional>
@@ -16,6 +16,8 @@ namespace Xenon
 
         virtual IApplicationBuilder& configureApplicationLogger(
             std::function<void(ApplicationLoggerConfiguration&)> cfgCallback) = 0;
+        virtual IApplicationBuilder& configureApplicationWindow(
+            std::function<void(ApplicationWindowConfiguration&)> cfgCallback) = 0;
         virtual std::shared_ptr<TApplication> build() = 0;
     };
 
@@ -25,21 +27,28 @@ namespace Xenon
     public:
         explicit ApplicationBuilder()
         {
-            mLoggerCfg = std::make_unique<ApplicationLoggerConfiguration>();
+            mApplicationConfiguration = std::make_unique<ApplicationConfiguration>();
         }
 
         IApplicationBuilder<TApplication>& configureApplicationLogger(
             const std::function<void(ApplicationLoggerConfiguration&)> cfgCallback) override
         {
-            cfgCallback(*mLoggerCfg);
+            cfgCallback(mApplicationConfiguration->loggerConfiguration);
+            return *this;
+        }
+
+        IApplicationBuilder<TApplication>& configureApplicationWindow(
+            const std::function<void(ApplicationWindowConfiguration&)> cfgCallback) override
+        {
+            cfgCallback(mApplicationConfiguration->windowConfiguration);
             return *this;
         }
 
         std::shared_ptr<TApplication> build() override
         {
-            Initializer::initialize(*mLoggerCfg);
+            Initializer::initialize(*mApplicationConfiguration);
 
-            const auto app = std::make_shared<TApplication>();
+            const auto app = std::make_shared<TApplication>(*mApplicationConfiguration);
             Initializer::registerApplication(app);
 
             Initializer::assertIsInitialized();
@@ -47,6 +56,6 @@ namespace Xenon
         }
 
     private:
-        std::unique_ptr<ApplicationLoggerConfiguration> mLoggerCfg;
+        std::unique_ptr<ApplicationConfiguration> mApplicationConfiguration;
     };
 }

@@ -4,7 +4,8 @@
 class Custom final : public Xenon::Application
 {
 public:
-    Custom()
+    explicit Custom(const Xenon::ApplicationConfiguration& config)
+        : Application(config)
     {
         Services::AppLogger::ref().info("Client test");
     }
@@ -18,7 +19,7 @@ int main()
         cfg.useFileLogger("Custom.log", true);
     });
 
-    auto application = appBuild.build();
+    const auto application = appBuild.build();
     application->run();
 
     return 0;

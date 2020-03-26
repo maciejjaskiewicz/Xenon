@@ -5,11 +5,18 @@
 
 namespace Xenon
 {
-    Window::Window(std::string title, const WindowResolution& resolution, const bool vSync)
-        : mTitle(std::move(title)), mResolution(resolution), mVSync(vSync)
+    Window::Window(std::string title, const WindowResolution& resolution, const bool vSync, const bool maximized)
+        : mTitle(std::move(title)), mResolution(resolution), mVSync(vSync),
+          mMaximized(maximized)
     {
         init();
+    }
 
+    Window::Window(const ApplicationWindowConfiguration& windowConfiguration)
+        : mTitle(windowConfiguration.getTitle()), mResolution(windowConfiguration.getResolution()),
+          mVSync(windowConfiguration.vSync()), mMaximized(windowConfiguration.isMaximized())
+    {
+        init();
     }
 
     void Window::init()
@@ -32,6 +39,8 @@ namespace Xenon
 
             XN_ENG_DEBUG("GLFW successfully initialized");
         }
+
+        mMaximized ? glfwWindowHint(GLFW_MAXIMIZED, GL_TRUE) : glfwWindowHint(GLFW_MAXIMIZED, GL_FALSE);
 
         const auto width = static_cast<int>(mResolution.width);
         const auto height = static_cast<int>(mResolution.height);
@@ -82,6 +91,11 @@ namespace Xenon
     bool Window::vSync() const
     {
         return mVSync;
+    }
+
+    bool Window::maximized() const
+    {
+        return mMaximized;
     }
 
     void Window::shutDown() const

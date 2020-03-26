@@ -4,9 +4,9 @@
 
 namespace Xenon
 {
-    Application::Application()
+    Application::Application(const ApplicationConfiguration& config)
     {
-        mWindow = std::make_unique<Window>();
+        mWindow = std::make_unique<Window>(config.windowConfiguration);
     }
 
     Application::~Application() = default;

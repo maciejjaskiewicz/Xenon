@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Config/ApplicationConfiguration.hpp"
 #include "../Utils/ServiceLocator.hpp"
 #include "../Services/Log/Logger.hpp"
 #include "Window.hpp"
@@ -26,7 +27,7 @@ namespace Xenon
         };
 
     protected:
-        explicit Application();
+        explicit Application(const ApplicationConfiguration&);
 
     private:
         std::unique_ptr<Window> mWindow;

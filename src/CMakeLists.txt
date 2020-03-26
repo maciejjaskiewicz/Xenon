@@ -2,11 +2,13 @@ set(XN_INCROOT ${PROJECT_SOURCE_DIR}/include/Xenon)
 set(XN_SRCROOT ${PROJECT_SOURCE_DIR}/src)
 
 add_subdirectory(Core)
+add_subdirectory(Config)
 add_subdirectory(Utils)
 add_subdirectory(Services)
 
 set (XN_INCLUDES
     ${XN_INCROOT}/Core.hpp
+    ${XN_INCROOT}/Config.hpp
     ${XN_INCROOT}/Xenon.hpp
     ${XN_INCROOT}/Utils.hpp
     ${XN_INCROOT}/Services.hpp
@@ -14,12 +16,14 @@ set (XN_INCLUDES
 
 set (XN_SOURCES
     ${XN_SOURCES_CORE}
+    ${XN_SOURCES_CONFIG}
     ${XN_SOURCES_UTILS}
     ${XN_SOURCES_SERVICES}
 )
 
 source_group("" FILES ${XN_INCLUDES})
 source_group("Core" FILES ${XN_SOURCES_CORE})
+source_group("Config" FILES ${XN_SOURCES_CONFIG})
 source_group("Utils" FILES ${XN_SOURCES_UTILS})
 source_group("Services\\Log" FILES ${XN_SOURCES_SERVICES_LOG})
 

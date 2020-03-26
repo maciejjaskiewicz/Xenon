@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Services/Log/ApplicationLoggerConfiguration.hpp"
+#include "../Config.hpp"
 #include <memory>
 
 namespace Xenon
@@ -14,7 +14,7 @@ namespace Xenon
     {
         inline static bool initialized = false;
 
-        static void initialize(const ApplicationLoggerConfiguration&);
+        static void initialize(const ApplicationConfiguration& applicationConfiguration);
         static void registerApplication(const std::shared_ptr<Application>& application);
         static void assertIsInitialized();
     private:

@@ -1,6 +1,7 @@
-#include <Xenon/Core/Application.hpp>
 #include <Xenon/Core/Initializer.hpp>
+
 #include <Xenon/Core/Assert.hpp>
+#include <Xenon/Core/Application.hpp>
 #include <Xenon/Services/Log/Logger.hpp>
 
 #include "InternalApplicationServices.hpp"
@@ -13,11 +14,11 @@
 
 namespace Xenon
 {
-    void Initializer::initialize(const ApplicationLoggerConfiguration& logCfg)
+    void Initializer::initialize(const ApplicationConfiguration& applicationConfiguration)
     {
         XN_ASSERT_COM(!initialized, "Already initialized!")
 
-        initializeLogging(logCfg);
+        initializeLogging(applicationConfiguration.loggerConfiguration);
 
         initialized = true;
         XN_ENG_INFO("Xenon initialized successfully");
