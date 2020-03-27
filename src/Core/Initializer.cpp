@@ -1,16 +1,12 @@
 #include <Xenon/Core/Initializer.hpp>
 
-#include <Xenon/Core/Assert.hpp>
-#include <Xenon/Core/Application.hpp>
+#include <Xenon/Core.hpp>
 #include <Xenon/Services/Log/Logger.hpp>
 
 #include "InternalApplicationServices.hpp"
-
 #include "../Services/Log/InternalLogger.hpp"
 #include "../Services/Log/ConsoleLogSink.hpp"
 #include "../Services/Log/FileLogSink.hpp"
-
-#include <spdlog/spdlog.h>
 
 namespace Xenon
 {

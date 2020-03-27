@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Core/Api.hpp"
+
 #include <string>
 
 namespace Xenon
@@ -42,10 +44,10 @@ namespace Xenon
         void maximize(bool maximize = true);
         void setVSync(bool enabled);
 
-        [[nodiscard]] std::string getTitle() const;
-        [[nodiscard]] WindowResolution getResolution() const;
-        [[nodiscard]] bool isMaximized() const;
-        [[nodiscard]] bool vSync() const;
+        XN_NODISCARD std::string getTitle() const;
+        XN_NODISCARD WindowResolution getResolution() const;
+        XN_NODISCARD bool isMaximized() const;
+        XN_NODISCARD bool vSync() const;
     private:
         std::string mTitle{ "Xenon application" };
         WindowResolution mResolution{ StandardWindowResolution::A_16X9_R_1280X720 };

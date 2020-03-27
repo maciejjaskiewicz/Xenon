@@ -5,6 +5,7 @@ set (TEST_UTILS
     ${TEST_SRCROOT}/Utils/ServiceLocator.cpp
     ${TEST_SRCROOT}/Utils/ImmutableServiceLocator.cpp
     ${TEST_SRCROOT}/Utils/TestService.hpp
+    ${TEST_SRCROOT}/Utils/Delegate.cpp
 )
 
 set (TEST_SOURCES

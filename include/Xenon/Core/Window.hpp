@@ -1,8 +1,9 @@
 #pragma once
 
+#include "Api.hpp"
 #include "../Config/ApplicationWindowConfiguration.hpp"
-#include <string>
 
+#include <string>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -21,9 +22,9 @@ namespace Xenon
         void onUpdate() const;
         void setVSync(bool enabled);
 
-        [[nodiscard]] WindowResolution resolution() const;
-        [[nodiscard]] bool vSync() const;
-        [[nodiscard]] bool maximized() const;
+        XN_NODISCARD WindowResolution resolution() const;
+        XN_NODISCARD bool vSync() const;
+        XN_NODISCARD bool maximized() const;
 
         Window(const Window& other) = delete;
         Window(Window&& other) = delete;

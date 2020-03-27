@@ -30,12 +30,12 @@ namespace Xenon
         return mClientLabel;
     }
 
-    [[nodiscard]] const ConsoleLoggerConfiguration& ApplicationLoggerConfiguration::getConsoleLoggerCfg() const
+    XN_NODISCARD const ConsoleLoggerConfiguration& ApplicationLoggerConfiguration::getConsoleLoggerCfg() const
     {
         return mConsoleLoggerCfg;
     }
 
-    [[nodiscard]] const FileLoggerConfiguration& ApplicationLoggerConfiguration::getFileLoggerCfg() const
+    XN_NODISCARD const FileLoggerConfiguration& ApplicationLoggerConfiguration::getFileLoggerCfg() const
     {
         return mFileLoggerCfg;
     }

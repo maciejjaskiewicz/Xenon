@@ -1,6 +1,5 @@
 #include <Xenon/Core/Window.hpp>
 
-#include <Xenon/Core/Assert.hpp>
 #include <Xenon/Core/Log.hpp>
 
 namespace Xenon
@@ -83,17 +82,17 @@ namespace Xenon
         mVSync = enabled;
     }
 
-    WindowResolution Window::resolution() const
+    XN_NODISCARD WindowResolution Window::resolution() const
     {
         return mResolution;
     }
 
-    bool Window::vSync() const
+    XN_NODISCARD bool Window::vSync() const
     {
         return mVSync;
     }
 
-    bool Window::maximized() const
+    XN_NODISCARD bool Window::maximized() const
     {
         return mMaximized;
     }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Core/Api.hpp"
+
 #include <string>
 
 namespace Xenon
@@ -25,9 +27,9 @@ namespace Xenon
         void useConsoleLogger() noexcept;
         void useFileLogger(const std::string& fileName, bool truncate = true);
 
-        [[nodiscard]] std::string getLabel() const;
-        [[nodiscard]] const ConsoleLoggerConfiguration& getConsoleLoggerCfg() const;
-        [[nodiscard]] const FileLoggerConfiguration& getFileLoggerCfg() const;
+        XN_NODISCARD std::string getLabel() const;
+        XN_NODISCARD const ConsoleLoggerConfiguration& getConsoleLoggerCfg() const;
+        XN_NODISCARD const FileLoggerConfiguration& getFileLoggerCfg() const;
 
     private:
         std::string mClientLabel{ "Client" };
