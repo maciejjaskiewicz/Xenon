@@ -1,9 +1,9 @@
 #pragma once
 
 #include "../Config/ApplicationConfiguration.hpp"
-#include "../Utils/ServiceLocator.hpp"
-#include "../Services/Log/Logger.hpp"
-#include "Window.hpp"
+#include "ApplicationServices.hpp"
+#include "Window/Window.hpp"
+#include "Events/WindowEvent.hpp"
 
 namespace Xenon
 {
@@ -19,17 +19,12 @@ namespace Xenon
         Application& operator=(Application&&) = delete;
         Application& operator=(Application const&) = delete;
 
-        struct Services
-        {
-            using AppLogger = ServiceLocator<Logger>;
-
-            static void assertIsInitialized();
-        };
-
+        using Services = ApplicationServices;
     protected:
         explicit Application(const ApplicationConfiguration&);
 
-    private:
+        virtual void onCloseEvent(const WindowCloseEvent&);
+
         std::unique_ptr<Window> mWindow;
         bool mRunning{ true };
 

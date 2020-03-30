@@ -2,6 +2,7 @@
 
 #include <Xenon/Core.hpp>
 #include <Xenon/Services/Log/Logger.hpp>
+#include <Xenon/Services/Event/EventBus.hpp>
 
 #include "InternalApplicationServices.hpp"
 #include "../Services/Log/InternalLogger.hpp"
@@ -15,6 +16,7 @@ namespace Xenon
         XN_ASSERT_COM(!initialized, "Already initialized!")
 
         initializeLogging(applicationConfiguration.loggerConfiguration);
+        initializeEventSystem();
 
         initialized = true;
         XN_ENG_INFO("Xenon initialized successfully");
@@ -67,5 +69,11 @@ namespace Xenon
 
         // Global log configuration
         GlobalLogConfiguration::sAppLoggerName = clientLogger->name();
+    }
+
+    void Initializer::initializeEventSystem()
+    {
+        const auto eventBus = std::make_shared<EventBus>();
+        Application::Services::EventBus::set(eventBus);
     }
 }

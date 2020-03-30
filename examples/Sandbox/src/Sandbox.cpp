@@ -1,4 +1,5 @@
 #include <Xenon/Xenon.hpp>
+#include <Xenon/Core/Events/KeyEvent.hpp>
 
 class Sandbox final : public Xenon::Application
 {
@@ -7,7 +8,16 @@ public:
         : Application(config)
     {
         XN_INFO("{} initialized", "Sandbox");
-        Services::AppLogger::ref().warn("Static test");
+
+        Services::EventBus::ref().subscribe<Xenon::KeyReleasedEvent>(
+            [this](const Xenon::KeyReleasedEvent& event)
+        {
+            if(event.keyCode == 256) // esc
+            {
+                XN_INFO("Closing from Sandbox");
+                mRunning = false;
+            }
+        });
     }
 };
 XN_REGISTER_APPLICATION(Sandbox);
@@ -20,6 +30,7 @@ void Xenon::configureApplication(IApplicationBuilder<Sandbox>& applicationBuilde
         cfg.setTitle("Sandbox application");
         cfg.maximize(false);
         cfg.setResolution(StandardWindowResolution::A_16X9_R_1280X720);
+        cfg.setVSync(true);
     });
 
     applicationBuilder.configureApplicationLogger(

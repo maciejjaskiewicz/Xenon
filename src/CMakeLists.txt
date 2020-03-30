@@ -22,10 +22,13 @@ set (XN_SOURCES
 )
 
 source_group("" FILES ${XN_INCLUDES})
-source_group("Core" FILES ${XN_SOURCES_CORE})
+source_group("Core" FILES ${XN_SOURCES_CORE_ROOT})
+source_group("Core\\Window" FILES ${XN_SOURCES_CORE_WINDOW})
+source_group("Core\\Events" FILES ${XN_SOURCES_CORE_EVENTS})
 source_group("Config" FILES ${XN_SOURCES_CONFIG})
 source_group("Utils" FILES ${XN_SOURCES_UTILS})
 source_group("Services\\Log" FILES ${XN_SOURCES_SERVICES_LOG})
+source_group("Services\\Event" FILES ${XN_SOURCES_SERVICES_EVENT})
 
 # create library
 add_library(Xenon STATIC ${XN_INCLUDES} ${XN_SOURCES})

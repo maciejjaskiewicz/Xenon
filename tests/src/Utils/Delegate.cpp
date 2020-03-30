@@ -178,4 +178,46 @@ namespace XenonTest::Utils
         EXPECT_NO_FATAL_FAILURE(actionDelegateCopy(test));
         EXPECT_EQ(test, 1);
     }
+
+    TEST(Utils_Delegate_Test, action_should_bind_to_member_function)
+    {
+        Xenon::Action<int&> actionDelegate{};
+        ASSERT_FALSE(actionDelegate);
+
+        struct TestStruct
+        {
+            void test(int& i)
+            {
+                i++;
+            }
+        };
+
+        TestStruct instance{};
+        actionDelegate.bind<&TestStruct::test>(&instance);
+
+        auto test = 0;
+        EXPECT_NO_FATAL_FAILURE(actionDelegate(test));
+        EXPECT_EQ(test, 1);
+    }
+
+    TEST(Utils_Delegate_Test, func_should_bind_to_member_function)
+    {
+        Xenon::Func<std::string, int> funcDelegate{};
+        ASSERT_FALSE(funcDelegate);
+
+        struct TestStruct
+        {
+            std::string test(int i)
+            {
+                return std::to_string(i);
+            }
+        };
+
+        TestStruct instance{};
+        funcDelegate.bind<&TestStruct::test>(&instance);
+
+        auto result = std::string("");
+        EXPECT_NO_FATAL_FAILURE({ result = funcDelegate(1); });
+        EXPECT_EQ(result, "1");
+    }
 }

@@ -29,7 +29,7 @@ namespace Xenon
 
         template<auto TFunction>
         void bind() noexcept
-        {
+        {   
             static_assert(std::is_invocable_r_v<TReturn, decltype(TFunction), Args...>);
 
             reset();
@@ -43,7 +43,6 @@ namespace Xenon
         template<typename TInvokable>
         void bind(TInvokable invokable)
         {
-            static_assert(sizeof(TInvokable) < sizeof(void*));
             static_assert(std::is_class_v<TInvokable>);
             static_assert(std::is_trivially_destructible_v<TInvokable>);
             static_assert(std::is_invocable_r_v<TReturn, TInvokable, Args...>);
@@ -55,6 +54,22 @@ namespace Xenon
             {
                 TInvokable& invokable = *reinterpret_cast<TInvokable*>(&storage);
                 return std::invoke(invokable, args...);
+            };
+        }
+
+        template<auto TCandidate, typename TInstance>
+        void bind(TInstance instance)
+        {
+            static_assert(std::is_trivially_copyable_v<TInstance> && std::is_trivially_destructible_v<TInstance>);
+            static_assert(std::is_invocable_r_v<TReturn, decltype(TCandidate), TInstance&, Args...>);
+
+            reset();
+            new (&mStorage) TInstance{ instance };
+
+            mFunction = [](StorageType& storage, Args... args) -> TReturn
+            {
+                TInstance instance = *reinterpret_cast<TInstance*>(&storage);
+                return std::invoke(TCandidate, instance, args...);
             };
         }
 
