@@ -131,4 +131,51 @@ namespace XenonTest::Utils
 
         EXPECT_EQ(funcDelegate1, funcDelegate2);
     }
+
+    TEST(Utils_Delegate_Test, action_should_bind_to_lambda)
+    {
+        Xenon::Action<int&> actionDelegate{};
+        ASSERT_FALSE(actionDelegate);
+
+        actionDelegate.bind([](int& i)
+        {
+            i++;    
+        });
+
+        auto test = 0;
+        EXPECT_NO_FATAL_FAILURE(actionDelegate(test));
+        EXPECT_EQ(test, 1);
+    }
+
+    TEST(Utils_Delegate_Test, func_should_bind_to_lambda)
+    {
+        Xenon::Func<std::string, int> funcDelegate{};
+        ASSERT_FALSE(funcDelegate);
+
+        funcDelegate.bind([](int i) -> std::string
+        {
+            return std::to_string(i);
+        });
+
+        auto result = std::string("");
+        EXPECT_NO_FATAL_FAILURE({ result = funcDelegate(1); });
+        EXPECT_EQ(result, "1");
+    }
+
+    TEST(Utils_Delegate_Test, copy_of_delegate_should_invoke)
+    {
+        Xenon::Action<int&> actionDelegate{};
+        ASSERT_FALSE(actionDelegate);
+
+        actionDelegate.bind([](int& i)
+        {
+            i++;
+        });
+
+        const auto actionDelegateCopy = actionDelegate;
+
+        auto test = 0;
+        EXPECT_NO_FATAL_FAILURE(actionDelegateCopy(test));
+        EXPECT_EQ(test, 1);
+    }
 }

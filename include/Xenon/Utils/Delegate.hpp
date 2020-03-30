@@ -18,7 +18,7 @@ namespace Xenon
     class Delegate<TReturn(Args...)>
     {
     public:
-        explicit Delegate() = default;
+        Delegate() = default;
 
         template<auto TFunction>
         explicit Delegate(BindDelegateArgT<TFunction>) noexcept
@@ -32,9 +32,29 @@ namespace Xenon
         {
             static_assert(std::is_invocable_r_v<TReturn, decltype(TFunction), Args...>);
 
-            mFunction = [](Args... args) -> TReturn
+            reset();
+
+            mFunction = [](StorageType&, Args... args) -> TReturn
             {
                 return TReturn(std::invoke(TFunction, std::forward<Args>(args)...));
+            };
+        }
+
+        template<typename TInvokable>
+        void bind(TInvokable invokable)
+        {
+            static_assert(sizeof(TInvokable) < sizeof(void*));
+            static_assert(std::is_class_v<TInvokable>);
+            static_assert(std::is_trivially_destructible_v<TInvokable>);
+            static_assert(std::is_invocable_r_v<TReturn, TInvokable, Args...>);
+
+            reset();
+            new (&mStorage) TInvokable{ std::move(invokable) };
+
+            mFunction = [](StorageType& storage, Args... args) -> TReturn
+            {
+                TInvokable& invokable = *reinterpret_cast<TInvokable*>(&storage);
+                return std::invoke(invokable, args...);
             };
         }
 
@@ -45,13 +65,14 @@ namespace Xenon
 
         void reset() noexcept
         {
+            new (&mStorage) void* { nullptr };
             mFunction = nullptr;
         }
 
         TReturn operator()(Args... args) const
         {
             XN_ASSERT_COM(mFunction, "An unbinded function cannot be invoked");
-            return mFunction(std::forward<Args>(args)...);
+            return mFunction(mStorage, std::forward<Args>(args)...);
         }
 
         explicit operator bool() const noexcept
@@ -65,7 +86,10 @@ namespace Xenon
         }
 
     private:
-        using FnPrototype = TReturn(Args...);
+        using StorageType = std::aligned_storage_t<sizeof(void*), alignof(void*)>;
+        using FnPrototype = TReturn(StorageType&, Args...);
+
+        mutable StorageType mStorage{};
         FnPrototype* mFunction{ nullptr };
     };
 
