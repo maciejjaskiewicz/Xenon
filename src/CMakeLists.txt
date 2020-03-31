@@ -5,6 +5,7 @@ add_subdirectory(Core)
 add_subdirectory(Config)
 add_subdirectory(Utils)
 add_subdirectory(Services)
+add_subdirectory(Platform)
 
 set (XN_INCLUDES
     ${XN_INCROOT}/Core.hpp
@@ -19,6 +20,7 @@ set (XN_SOURCES
     ${XN_SOURCES_CONFIG}
     ${XN_SOURCES_UTILS}
     ${XN_SOURCES_SERVICES}
+    ${XN_SOURCES_PLATFORM}
 )
 
 source_group("" FILES ${XN_INCLUDES})
@@ -30,6 +32,7 @@ source_group("Config" FILES ${XN_SOURCES_CONFIG})
 source_group("Utils" FILES ${XN_SOURCES_UTILS})
 source_group("Services\\Log" FILES ${XN_SOURCES_SERVICES_LOG})
 source_group("Services\\Event" FILES ${XN_SOURCES_SERVICES_EVENT})
+source_group("Platform\\Common" FILES ${XN_SOURCES_PLATFORM_COMMON})
 
 # create library
 add_library(Xenon STATIC ${XN_INCLUDES} ${XN_SOURCES})

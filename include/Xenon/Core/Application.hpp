@@ -12,7 +12,7 @@ namespace Xenon
     public:
         virtual ~Application();
 
-        void run() const;
+        void run();
 
         Application(const Application&) = delete;
         Application(Application&&) = delete;
@@ -23,6 +23,7 @@ namespace Xenon
     protected:
         explicit Application(const ApplicationConfiguration&);
 
+        virtual void update() = 0;
         virtual void onCloseEvent(const WindowCloseEvent&);
 
         std::unique_ptr<Window> mWindow;

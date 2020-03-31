@@ -8,6 +8,7 @@
 #include "../Services/Log/InternalLogger.hpp"
 #include "../Services/Log/ConsoleLogSink.hpp"
 #include "../Services/Log/FileLogSink.hpp"
+#include "Input/NullInput.hpp"
 
 namespace Xenon
 {
@@ -17,6 +18,7 @@ namespace Xenon
 
         initializeLogging(applicationConfiguration.loggerConfiguration);
         initializeEventSystem();
+        initializeInput();
 
         initialized = true;
         XN_ENG_INFO("Xenon initialized successfully");
@@ -75,5 +77,11 @@ namespace Xenon
     {
         const auto eventBus = std::make_shared<EventBus>();
         Application::Services::EventBus::set(eventBus);
+    }
+
+    void Initializer::initializeInput()
+    {
+        const auto input = std::make_shared<NullInput>();
+        Application::Services::Input::set(input);
     }
 }

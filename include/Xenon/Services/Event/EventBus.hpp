@@ -101,13 +101,12 @@ namespace Xenon
 
         void publish(const std::type_index& idx, const Event& event) const
         {
-            XN_ENG_TRACE(event.toString());
+            //XN_ENG_TRACE(event.toString());
 
             const auto eventSubjectIterator{ mSubjects.find(idx) };
 
             if (eventSubjectIterator == std::end(mSubjects))
             {
-                //XN_ENG_WARN("No listeners were found for event: {}", event.toString());
                 return;
             }
 

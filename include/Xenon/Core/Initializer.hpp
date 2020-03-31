@@ -20,5 +20,6 @@ namespace Xenon
     private:
         static void initializeLogging(const ApplicationLoggerConfiguration& logCfg);
         static void initializeEventSystem();
+        static void initializeInput();
     };
 }

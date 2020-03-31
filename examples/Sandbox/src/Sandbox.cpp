@@ -19,6 +19,22 @@ public:
             }
         });
     }
+
+    void update() override
+    {
+        if(Services::Input::ref().isKeyPressed(Xenon::KeyCode::Space))
+        {
+            XN_DEBUG("Space is pressed");
+        }
+
+        if (Services::Input::ref().isMouseButtonPressed(Xenon::MouseButtonCode::ButtonRight))
+        {
+            auto [x, y] = Services::Input::ref().mousePosition();
+
+            XN_DEBUG("Right mouse button is pressed");
+            XN_DEBUG("Mouse possition: X={}, Y={}", x, y);
+        }
+    }
 };
 XN_REGISTER_APPLICATION(Sandbox);
 

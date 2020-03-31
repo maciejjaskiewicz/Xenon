@@ -9,6 +9,11 @@ public:
     {
         Services::Logger::ref().info("Client test");
     }
+
+    void update() override
+    {
+        
+    }
 };
 
 int main()

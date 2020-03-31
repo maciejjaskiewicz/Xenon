@@ -4,49 +4,30 @@
 #include "../../Config/ApplicationWindowConfiguration.hpp"
 
 #include <string>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <memory>
 
 namespace Xenon
 {
-    struct WindowData
-    {
-        std::string title;
-        WindowResolution resolution{};
-        bool vSync{ false };
-        bool maximized{ false };
-    };
-
     class Window
     {
     public:
-        explicit Window(const std::string& title = "Xenon", 
-                        const WindowResolution& resolution = WindowResolution(), 
-                        bool vSync = false,
-                        bool maximized = false);
-        explicit Window(const ApplicationWindowConfiguration& windowConfiguration);
-        ~Window();
+        virtual ~Window() = default;
 
-        void update() const;
-        void setVSync(bool enabled);
+        virtual void update() const = 0;
+        virtual void setVSync(bool enabled) = 0;
 
-        XN_NODISCARD GLFWwindow& glfwWindow() const noexcept;
-        XN_NODISCARD WindowResolution resolution() const noexcept;
-        XN_NODISCARD bool vSync() const noexcept;
-        XN_NODISCARD bool maximized() const noexcept;
+        XN_NODISCARD virtual void* window() const noexcept = 0;
+        XN_NODISCARD virtual WindowResolution resolution() const noexcept = 0;
+        XN_NODISCARD virtual bool vSync() const noexcept = 0;
+        XN_NODISCARD virtual bool maximized() const noexcept = 0;
 
-        Window(const Window& other) = delete;
-        Window(Window&& other) = delete;
-        Window& operator=(const Window& other) = delete;
-        Window& operator=(Window&& other) = delete;
+        XN_NODISCARD static std::unique_ptr<Window> create(
+            const std::string& title = "Xenon",
+            const WindowResolution& resolution = WindowResolution(),
+            bool vSync = false,
+            bool maximized = false);
 
-    private:
-        void init();
-        void shutDown() const;
-
-        GLFWwindow* mWindow{ nullptr };
-        WindowData mData{};
-
-        inline static uint8_t sGLFWWindowCount { 0 };
+        XN_NODISCARD static std::unique_ptr<Window> create(
+            const ApplicationWindowConfiguration& windowConfiguration);
     };
 }

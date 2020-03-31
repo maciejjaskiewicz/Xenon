@@ -48,6 +48,9 @@ set (XN_SOURCES_CORE_EVENTS
 
 # input sources
 set (XN_SOURCES_CORE_INPUT_L
+    ${XN_SRCROOT}/Input/Input.cpp
+    ${XN_INCROOT}/Input/Input.hpp
+    ${XN_SRCROOT}/Input/NullInput.hpp
     ${XN_INCROOT}/Input/KeyCode.hpp
     ${XN_INCROOT}/Input/MouseCode.hpp
 )

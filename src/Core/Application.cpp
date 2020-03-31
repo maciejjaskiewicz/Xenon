@@ -1,15 +1,19 @@
 #include <Xenon/Core/Application.hpp>
 
 #include <Xenon/Core/Window/WindowEventManager.hpp>
+#include <Xenon/Core/Input/Input.hpp>
 
 namespace Xenon
 {
     Application::Application(const ApplicationConfiguration& config)
     {
-        mWindow = std::make_unique<Window>(config.windowConfiguration);
+        mWindow = Window::create(config.windowConfiguration);
 
-        const WindowEventManager windowEventManager(*mWindow);
-        windowEventManager.registerEvents();
+        const auto windowEventManager = WindowEventManager::create(*mWindow);
+        windowEventManager->registerEvents();
+
+        const std::shared_ptr<Input> input = Input::create(*mWindow);
+        Services::Input::set(input);
 
         Services::EventBus::ref().subscribe<WindowCloseEvent, &Application::onCloseEvent>(this);
     }
@@ -23,14 +27,15 @@ namespace Xenon
 
     Application::~Application() = default;
 
-    void Application::run() const
+    void Application::run()
     {
         while (mRunning)
         {
             Services::EventBus::ref().update();
 
-            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT);
+            /*glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);*/
+            update();
 
             mWindow->update();
         }
