@@ -7,7 +7,7 @@ public:
     explicit Custom(const Xenon::ApplicationConfiguration& config)
         : Application(config)
     {
-        Services::AppLogger::ref().info("Client test");
+        Services::Logger::ref().info("Client test");
     }
 };
 

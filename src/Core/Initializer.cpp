@@ -65,7 +65,7 @@ namespace Xenon
 
         // Client logger
         const auto clientLogger = std::make_shared<Logger>(logCfg.getLabel());
-        Application::Services::AppLogger::set(clientLogger);
+        Application::Services::Logger::set(clientLogger);
 
         // Global log configuration
         GlobalLogConfiguration::sAppLoggerName = clientLogger->name();

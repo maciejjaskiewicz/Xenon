@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Services/Event/Event.hpp"
+#include "../Input/KeyCode.hpp"
 
 #include <fmt/format.h>
 
@@ -8,10 +9,10 @@ namespace Xenon
 {
     struct KeyEvent : Event
     {
-        int keyCode;
+        KeyCode keyCode;
 
     protected:
-        explicit KeyEvent(const unsigned keyCode)
+        explicit KeyEvent(const KeyCode keyCode)
             : keyCode(keyCode)
         { }
     };
@@ -20,7 +21,7 @@ namespace Xenon
     {
         bool repeat;
 
-        explicit KeyPressedEvent(const int keyCode, const bool repeat)
+        explicit KeyPressedEvent(const KeyCode keyCode, const bool repeat)
             : KeyEvent(keyCode), repeat(repeat)
         { }
 
@@ -32,7 +33,7 @@ namespace Xenon
 
     struct KeyReleasedEvent final : KeyEvent
     {
-        explicit KeyReleasedEvent(const int keyCode)
+        explicit KeyReleasedEvent(const KeyCode keyCode)
             : KeyEvent(keyCode)
         { }
 
@@ -44,7 +45,7 @@ namespace Xenon
 
     struct KeyTypedEvent final : KeyEvent
     {
-        explicit KeyTypedEvent(const int keyCode)
+        explicit KeyTypedEvent(const KeyCode keyCode)
             : KeyEvent(keyCode)
         { }
 

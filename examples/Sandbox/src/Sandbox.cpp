@@ -12,7 +12,7 @@ public:
         Services::EventBus::ref().subscribe<Xenon::KeyReleasedEvent>(
             [this](const Xenon::KeyReleasedEvent& event)
         {
-            if(event.keyCode == 256) // esc
+            if(event.keyCode == XN_KEY_ESCAPE)
             {
                 XN_INFO("Closing from Sandbox");
                 mRunning = false;

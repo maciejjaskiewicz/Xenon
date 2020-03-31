@@ -10,12 +10,12 @@ namespace Xenon
 {
     struct ApplicationServices
     {
-        using AppLogger = ServiceLocator<Logger>;
+        using Logger = ServiceLocator<Xenon::Logger>;
         using EventBus = ImmutableServiceLocator<Xenon::EventBus>;
 
         static void assertIsInitialized()
         {
-            XN_ASSERT_COM(!AppLogger::empty(), "Uninitialized");
+            XN_ASSERT_COM(!Logger::empty(), "Uninitialized");
             EventBus::assertIsNotEmpty();
         }
     };

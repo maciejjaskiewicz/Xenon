@@ -6,3 +6,4 @@
 #include "Core/Application.hpp"
 #include "Core/ApplicationBuilder.hpp"
 #include "Core/Window/Window.hpp"
+#include "Core/Window/WindowResolution.hpp"

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Services/Event/Event.hpp"
+#include "../Input/MouseCode.hpp"
 
 #include <fmt/format.h>
 
@@ -8,17 +9,17 @@ namespace Xenon
 {
     struct MouseButtonEvent : Event
     {
-        int buttonCode;
+        MouseButtonCode buttonCode;
 
     protected:
-        explicit MouseButtonEvent(const int buttonCode)
+        explicit MouseButtonEvent(const MouseButtonCode buttonCode)
             : buttonCode(buttonCode)
         { }
     };
 
     struct MouseButtonPressedEvent final : MouseButtonEvent
     {
-        explicit MouseButtonPressedEvent(const int buttonCode)
+        explicit MouseButtonPressedEvent(const MouseButtonCode buttonCode)
             : MouseButtonEvent(buttonCode)
         { }
 
@@ -30,7 +31,7 @@ namespace Xenon
 
     struct MouseButtonReleasedEvent final : MouseButtonEvent
     {
-        explicit MouseButtonReleasedEvent(const int buttonCode)
+        explicit MouseButtonReleasedEvent(const MouseButtonCode buttonCode)
             : MouseButtonEvent(buttonCode)
         { }
 
@@ -42,9 +43,9 @@ namespace Xenon
 
     struct MouseMovedEvent final : Event
     {
-        double x, y;
+        float x, y;
 
-        explicit MouseMovedEvent(const double x, const double y)
+        explicit MouseMovedEvent(const float x, const float y)
             : x(x), y(y)
         { }
 
@@ -56,9 +57,9 @@ namespace Xenon
 
     struct MouseScrolledEvent final : Event
     {
-        double xOffset, yOffset;
+        float xOffset, yOffset;
 
-        explicit MouseScrolledEvent(const double xOffset, const double yOffset)
+        explicit MouseScrolledEvent(const float xOffset, const float yOffset)
             : xOffset(xOffset), yOffset(yOffset)
         { }
 

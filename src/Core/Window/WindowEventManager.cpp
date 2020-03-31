@@ -43,16 +43,18 @@ namespace Xenon
 
     void WindowEventManager::keyCallback(GLFWwindow* window, const int key, const int scanCode, const int action, const int mods)
     {
+        const auto keyCode = static_cast<KeyCode>(key);
+
         switch (action)
         {
         case GLFW_PRESS:
-            ApplicationServices::EventBus::ref().trigger<KeyPressedEvent>(key, false);
+            ApplicationServices::EventBus::ref().trigger<KeyPressedEvent>(keyCode, false);
             break;
         case GLFW_REPEAT:
-            ApplicationServices::EventBus::ref().trigger<KeyPressedEvent>(key, true);
+            ApplicationServices::EventBus::ref().trigger<KeyPressedEvent>(keyCode, true);
             break;
         case GLFW_RELEASE:
-            ApplicationServices::EventBus::ref().trigger<KeyReleasedEvent>(key);
+            ApplicationServices::EventBus::ref().trigger<KeyReleasedEvent>(keyCode);
             break;
         default: return;
         }
@@ -60,18 +62,20 @@ namespace Xenon
 
     void WindowEventManager::charCallback(GLFWwindow* window, const unsigned keyCode)
     {
-        ApplicationServices::EventBus::ref().trigger<KeyTypedEvent>(static_cast<int>(keyCode));
+        ApplicationServices::EventBus::ref().trigger<KeyTypedEvent>(static_cast<KeyCode>(keyCode));
     }
 
     void WindowEventManager::mouseButtonCallback(GLFWwindow* window, const int button, const int action, const int mods)
     {
+        const auto mouseButtonCode = static_cast<MouseButtonCode>(button);
+
         switch (action)
         {
         case GLFW_PRESS:
-            ApplicationServices::EventBus::ref().trigger<MouseButtonPressedEvent>(button);
+            ApplicationServices::EventBus::ref().trigger<MouseButtonPressedEvent>(mouseButtonCode);
             break;
         case GLFW_RELEASE:
-            ApplicationServices::EventBus::ref().trigger<MouseButtonReleasedEvent>(button);
+            ApplicationServices::EventBus::ref().trigger<MouseButtonReleasedEvent>(mouseButtonCode);
             break;
         default: return;
         }
@@ -79,11 +83,17 @@ namespace Xenon
 
     void WindowEventManager::cursorPosCallback(GLFWwindow* window, const double xOffset, const double yOffset)
     {
-        ApplicationServices::EventBus::ref().trigger<MouseMovedEvent>(xOffset, yOffset);
+        const auto xOffsetF = static_cast<float>(xOffset);
+        const auto yOffsetF = static_cast<float>(yOffset);
+
+        ApplicationServices::EventBus::ref().trigger<MouseMovedEvent>(xOffsetF, yOffsetF);
     }
 
     void WindowEventManager::scrollCallback(GLFWwindow* window, const double xOffset, const double yOffset)
     {
-        ApplicationServices::EventBus::ref().trigger<MouseScrolledEvent>(xOffset, yOffset);
+        const auto xOffsetF = static_cast<float>(xOffset);
+        const auto yOffsetF = static_cast<float>(yOffset);
+
+        ApplicationServices::EventBus::ref().trigger<MouseScrolledEvent>(xOffsetF, yOffsetF);
     }
 }

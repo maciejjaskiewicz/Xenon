@@ -46,10 +46,22 @@ set (XN_SOURCES_CORE_EVENTS
     PARENT_SCOPE
 )
 
+# input sources
+set (XN_SOURCES_CORE_INPUT_L
+    ${XN_INCROOT}/Input/KeyCode.hpp
+    ${XN_INCROOT}/Input/MouseCode.hpp
+)
+
+set (XN_SOURCES_CORE_INPUT
+    ${XN_SOURCES_CORE_INPUT_L}
+    PARENT_SCOPE
+)
+
 # gather sources
 set (XN_SOURCES_CORE
     ${XN_SOURCES_CORE_ROOT_L}
     ${XN_SOURCES_CORE_WINDOW_L}
     ${XN_SOURCES_CORE_EVENTS_L}
+    ${XN_SOURCES_CORE_INPUT_L}
     PARENT_SCOPE
 )
