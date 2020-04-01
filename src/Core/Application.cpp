@@ -3,6 +3,10 @@
 #include <Xenon/Core/Window/WindowEventManager.hpp>
 #include <Xenon/Core/Input/Input.hpp>
 
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <imgui.h>
+
 namespace Xenon
 {
     Application::Application(const ApplicationConfiguration& config)
@@ -14,6 +18,8 @@ namespace Xenon
 
         const std::shared_ptr<Input> input = Input::create(*mWindow);
         Services::Input::set(input);
+
+        mGui = Gui::create(*mWindow);
 
         Services::EventBus::ref().subscribe<WindowCloseEvent, &Application::onCloseEvent>(this);
     }
@@ -31,13 +37,25 @@ namespace Xenon
     {
         while (mRunning)
         {
-            Services::EventBus::ref().update();
+            clear(); // Move to renderer
 
-            /*glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT);*/
-            update();
+            Services::EventBus::ref().update();
+            this->update();
+
+            mGui->newFrame();
+            updateGui();
+            mGui->render();
 
             mWindow->update();
         }
+    }
+
+    void Application::updateGui()
+    { }
+
+    void Application::clear() const
+    {
+        glClearColor(mClearColor.x, mClearColor.y, mClearColor.z, mClearColor.w);
+        glClear(GL_COLOR_BUFFER_BIT);
     }
 }

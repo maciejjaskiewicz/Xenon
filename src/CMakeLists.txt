@@ -28,11 +28,13 @@ source_group("Core" FILES ${XN_SOURCES_CORE_ROOT})
 source_group("Core\\Window" FILES ${XN_SOURCES_CORE_WINDOW})
 source_group("Core\\Events" FILES ${XN_SOURCES_CORE_EVENTS})
 source_group("Core\\Input" FILES ${XN_SOURCES_CORE_INPUT})
+source_group("Core\\Gui" FILES ${XN_SOURCES_CORE_GUI})
 source_group("Config" FILES ${XN_SOURCES_CONFIG})
 source_group("Utils" FILES ${XN_SOURCES_UTILS})
 source_group("Services\\Log" FILES ${XN_SOURCES_SERVICES_LOG})
 source_group("Services\\Event" FILES ${XN_SOURCES_SERVICES_EVENT})
 source_group("Platform\\Common" FILES ${XN_SOURCES_PLATFORM_COMMON})
+source_group("Platform\\OpenGL" FILES ${XN_SOURCES_PLATFORM_OPENGL})
 
 # create library
 add_library(Xenon STATIC ${XN_INCLUDES} ${XN_SOURCES})
@@ -43,6 +45,7 @@ find_package(OpenGL REQUIRED)
 
 target_link_libraries(Xenon OpenGL::GL)
 target_link_libraries(Xenon glfw)
+target_link_libraries(Xenon ImGui)
 conan_target_link_libraries(Xenon)
 
 # set include directories

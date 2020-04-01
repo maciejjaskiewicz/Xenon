@@ -56,6 +56,7 @@ include(FetchContent)
 SET(FETCHCONTENT_QUIET OFF)
 
 include(FetchGLFW)
+include(FetchImGui)
 
 # add src
 add_subdirectory(src)

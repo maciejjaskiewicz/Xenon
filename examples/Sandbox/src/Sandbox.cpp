@@ -1,6 +1,9 @@
 #include <Xenon/Xenon.hpp>
 #include <Xenon/Core/Events/KeyEvent.hpp>
 
+#include <imgui.h>
+#include <glm/gtc/type_ptr.hpp>
+
 class Sandbox final : public Xenon::Application
 {
 public:
@@ -35,6 +38,33 @@ public:
             XN_DEBUG("Mouse possition: X={}, Y={}", x, y);
         }
     }
+
+    void updateGui() override
+    {
+        ImGui::Begin("Debug");
+
+        auto& io = ImGui::GetIO();
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+        ImGui::Text("%d vertices, %d indices (%d triangles)", io.MetricsRenderVertices, io.MetricsRenderIndices, io.MetricsRenderIndices / 3);
+        ImGui::Text("%d active windows (%d visible)", io.MetricsActiveWindows, io.MetricsRenderWindows);
+        ImGui::Separator();
+
+        ImGui::ColorEdit4("Clear Color", glm::value_ptr(mClearColor));
+        if(!mShowImGuiDemo)
+        {
+            mShowImGuiDemo = ImGui::Button("Run ImGui demo", ImVec2(200, 30));
+        }
+
+        ImGui::End();
+
+        if(mShowImGuiDemo)
+        {
+            ImGui::ShowDemoWindow(&mShowImGuiDemo);
+        }
+    }
+
+private:
+    inline static bool mShowImGuiDemo{ false };
 };
 XN_REGISTER_APPLICATION(Sandbox);
 

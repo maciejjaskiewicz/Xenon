@@ -4,6 +4,9 @@
 #include "ApplicationServices.hpp"
 #include "Window/Window.hpp"
 #include "Events/WindowEvent.hpp"
+#include "Gui/Gui.hpp"
+
+#include <glm/glm.hpp>
 
 namespace Xenon
 {
@@ -24,11 +27,17 @@ namespace Xenon
         explicit Application(const ApplicationConfiguration&);
 
         virtual void update() = 0;
+        virtual void updateGui();
         virtual void onCloseEvent(const WindowCloseEvent&);
 
         std::unique_ptr<Window> mWindow;
+        std::unique_ptr<Gui> mGui;
         bool mRunning{ true };
+        glm::vec4 mClearColor{ 0.2f, 0.3f, 0.3f, 1.0f };
 
         template<typename> friend class ApplicationBuilder;
+    private:
+        // Move to renderer
+        void clear() const;
     };
 }
