@@ -44,13 +44,13 @@ namespace Xenon
         LogSinks::Console::createAndSet<NullConsoleLogSink>();
         LogSinks::Console::createAndSet<NullConsoleLogSink>();
 
-        const auto& consoleSinkCfg = logCfg.getConsoleLoggerCfg();
+        const auto& consoleSinkCfg = logCfg.consoleLoggerCfg();
         if (consoleSinkCfg.enabled)
         {
             LogSinks::Console::createAndSet<ConsoleLogSink>();
         }
 
-        const auto& fileLogCfg = logCfg.getFileLoggerCfg();
+        const auto& fileLogCfg = logCfg.fileLoggerCfg();
         if (fileLogCfg.enabled)
         {
             LogSinks::File::createAndSet<FileLogSink>(
@@ -66,7 +66,7 @@ namespace Xenon
         spdlog::set_default_logger(internalLogger->getInternal());
 
         // Client logger
-        const auto clientLogger = std::make_shared<Logger>(logCfg.getLabel());
+        const auto clientLogger = std::make_shared<Logger>(logCfg.label());
         Application::Services::Logger::set(clientLogger);
 
         // Global log configuration

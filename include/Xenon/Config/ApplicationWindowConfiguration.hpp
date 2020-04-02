@@ -7,20 +7,19 @@
 
 namespace Xenon
 {
-    
     class ApplicationWindowConfiguration
     {
     public:
         explicit ApplicationWindowConfiguration();
 
         void setTitle(const std::string& title);
-        void setResolution(const WindowResolution& resolution);
-        void maximize(bool maximize = true);
-        void setVSync(bool enabled);
+        void setResolution(const WindowResolution& resolution) noexcept;
+        void maximize(bool maximize = true) noexcept;
+        void setVSync(bool enabled) noexcept;
 
-        XN_NODISCARD std::string getTitle() const;
-        XN_NODISCARD WindowResolution getResolution() const;
-        XN_NODISCARD bool isMaximized() const;
+        XN_NODISCARD std::string title() const;
+        XN_NODISCARD WindowResolution resolution() const;
+        XN_NODISCARD bool maximized() const;
         XN_NODISCARD bool vSync() const;
     private:
         std::string mTitle{ "Xenon application" };

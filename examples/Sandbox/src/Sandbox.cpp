@@ -70,8 +70,7 @@ XN_REGISTER_APPLICATION(Sandbox);
 
 void Xenon::configureApplication(IApplicationBuilder<Sandbox>& applicationBuilder)
 {
-    applicationBuilder.configureApplicationWindow(
-        [](ApplicationWindowConfiguration& cfg)
+    applicationBuilder.configureApplicationWindow([](ApplicationWindowConfiguration& cfg)
     {
         cfg.setTitle("Sandbox application");
         cfg.maximize(false);
@@ -79,11 +78,16 @@ void Xenon::configureApplication(IApplicationBuilder<Sandbox>& applicationBuilde
         cfg.setVSync(true);
     });
 
-    applicationBuilder.configureApplicationLogger(
-        [](ApplicationLoggerConfiguration& cfg)
+    applicationBuilder.configureApplicationLogger([](ApplicationLoggerConfiguration& cfg)
     {
         cfg.setLabel("Sandbox");
         cfg.useConsoleLogger();
         cfg.useFileLogger("Sandbox.log", true);
+    });
+
+    applicationBuilder.configureApplicationGui([](ApplicationGuiConfiguration& cfg)
+    {
+        cfg.setStyle(GuiStyle::Dark);
+        cfg.useDocking();
     });
 }

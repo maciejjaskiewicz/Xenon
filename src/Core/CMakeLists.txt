@@ -64,6 +64,7 @@ set (XN_SOURCES_CORE_INPUT
 set (XN_SOURCES_CORE_GUI_L
     ${XN_SRCROOT}/Gui/Gui.cpp
     ${XN_INCROOT}/Gui/Gui.hpp
+    ${XN_INCROOT}/Gui/GuiStyle.hpp
 )
 
 set (XN_SOURCES_CORE_GUI

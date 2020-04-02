@@ -12,32 +12,32 @@ namespace Xenon
         mTitle = title;
     }
 
-    void ApplicationWindowConfiguration::setResolution(const WindowResolution& resolution)
+    void ApplicationWindowConfiguration::setResolution(const WindowResolution& resolution) noexcept
     {
         mResolution = resolution;
     }
 
-    void ApplicationWindowConfiguration::maximize(const bool maximize)
+    void ApplicationWindowConfiguration::maximize(const bool maximize) noexcept
     {
         mMaximized = maximize;
     }
 
-    void ApplicationWindowConfiguration::setVSync(const bool enabled)
+    void ApplicationWindowConfiguration::setVSync(const bool enabled) noexcept
     {
         mVSync = enabled;
     }
 
-    std::string ApplicationWindowConfiguration::getTitle() const
+    std::string ApplicationWindowConfiguration::title() const
     {
         return mTitle;
     }
 
-    WindowResolution ApplicationWindowConfiguration::getResolution() const
+    WindowResolution ApplicationWindowConfiguration::resolution() const
     {
         return mResolution;
     }
 
-    bool ApplicationWindowConfiguration::isMaximized() const
+    bool ApplicationWindowConfiguration::maximized() const
     {
         return mMaximized;
     }

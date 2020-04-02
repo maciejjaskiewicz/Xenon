@@ -4,8 +4,8 @@
 
 namespace Xenon
 {
-    std::unique_ptr<Gui> Gui::create(Window& window)
+    std::unique_ptr<Gui> Gui::create(Window& window, const GuiConfiguration& guiConfiguration)
     {
-        return std::make_unique<OpenGLGui>(window);
+        return std::make_unique<OpenGLGui>(window, guiConfiguration);
     }
 }

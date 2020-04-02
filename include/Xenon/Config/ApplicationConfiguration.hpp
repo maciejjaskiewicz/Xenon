@@ -2,6 +2,7 @@
 
 #include "ApplicationLoggerConfiguration.hpp"
 #include "ApplicationWindowConfiguration.hpp"
+#include "ApplicationGuiConfiguration.hpp"
 
 namespace Xenon
 {
@@ -9,5 +10,6 @@ namespace Xenon
     {
         ApplicationLoggerConfiguration loggerConfiguration{};
         ApplicationWindowConfiguration windowConfiguration{};
+        ApplicationGuiConfiguration guiConfiguration{};
     };
 }

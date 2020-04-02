@@ -7,5 +7,7 @@ set (XN_SOURCES_CONFIG
     ${XN_INCROOT}/ApplicationLoggerConfiguration.hpp
     ${XN_SRCROOT}/ApplicationWindowConfiguration.cpp
     ${XN_INCROOT}/ApplicationWindowConfiguration.hpp
+    ${XN_SRCROOT}/ApplicationGuiConfiguration.cpp
+    ${XN_INCROOT}/ApplicationGuiConfiguration.hpp
     PARENT_SCOPE
 )

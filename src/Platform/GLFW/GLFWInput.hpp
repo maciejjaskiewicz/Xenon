@@ -6,10 +6,10 @@
 
 namespace Xenon
 {
-    class CommonInput final : public Input
+    class GLFWInput final : public Input
     {
     public:
-        explicit CommonInput(Window& window);
+        explicit GLFWInput(Window& window);
 
         XN_NODISCARD bool isKeyPressed(KeyCode key) const override;
         XN_NODISCARD bool isMouseButtonPressed(MouseButtonCode mouseButton) const override;
@@ -18,5 +18,6 @@ namespace Xenon
 
     private:
         GLFWwindow* mWindow;
+        bool mInitialized{ false };
     };
 }

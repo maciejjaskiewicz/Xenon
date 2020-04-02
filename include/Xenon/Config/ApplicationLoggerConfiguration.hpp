@@ -27,9 +27,9 @@ namespace Xenon
         void useConsoleLogger() noexcept;
         void useFileLogger(const std::string& fileName, bool truncate = true);
 
-        XN_NODISCARD std::string getLabel() const;
-        XN_NODISCARD const ConsoleLoggerConfiguration& getConsoleLoggerCfg() const;
-        XN_NODISCARD const FileLoggerConfiguration& getFileLoggerCfg() const;
+        XN_NODISCARD std::string label() const;
+        XN_NODISCARD const ConsoleLoggerConfiguration& consoleLoggerCfg() const;
+        XN_NODISCARD const FileLoggerConfiguration& fileLoggerCfg() const;
 
     private:
         std::string mClientLabel{ "Client" };

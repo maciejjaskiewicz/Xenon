@@ -11,7 +11,8 @@ namespace Xenon
 {
     Application::Application(const ApplicationConfiguration& config)
     {
-        mWindow = Window::create(config.windowConfiguration);
+        mWindow = Window::create(WindowConfiguration(config.windowConfiguration));
+        mWindow->init();
 
         const auto windowEventManager = WindowEventManager::create(*mWindow);
         windowEventManager->registerEvents();
@@ -19,7 +20,8 @@ namespace Xenon
         const std::shared_ptr<Input> input = Input::create(*mWindow);
         Services::Input::set(input);
 
-        mGui = Gui::create(*mWindow);
+        mGui = Gui::create(*mWindow, GuiConfiguration(config.guiConfiguration));
+        mGui->init();
 
         Services::EventBus::ref().subscribe<WindowCloseEvent, &Application::onCloseEvent>(this);
     }

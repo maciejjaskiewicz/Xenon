@@ -18,6 +18,8 @@ namespace Xenon
             std::function<void(ApplicationLoggerConfiguration&)> cfgCallback) = 0;
         virtual IApplicationBuilder& configureApplicationWindow(
             std::function<void(ApplicationWindowConfiguration&)> cfgCallback) = 0;
+        virtual IApplicationBuilder& configureApplicationGui(
+            std::function<void(ApplicationGuiConfiguration&)> cfgCallback) = 0;
         virtual std::shared_ptr<TApplication> build() = 0;
     };
 
@@ -41,6 +43,13 @@ namespace Xenon
             const std::function<void(ApplicationWindowConfiguration&)> cfgCallback) override
         {
             cfgCallback(mApplicationConfiguration->windowConfiguration);
+            return *this;
+        }
+
+        IApplicationBuilder<TApplication>& configureApplicationGui(
+            const std::function<void(ApplicationGuiConfiguration&)> cfgCallback) override
+        {
+            cfgCallback(mApplicationConfiguration->guiConfiguration);
             return *this;
         }
 

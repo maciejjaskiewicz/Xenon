@@ -17,7 +17,7 @@ namespace Xenon
     {
         mConsoleLoggerCfg.enabled = true;
     }
-
+    
     void ApplicationLoggerConfiguration::useFileLogger(const std::string& fileName, const bool truncate)
     {
         mFileLoggerCfg.enabled = true;
@@ -25,17 +25,17 @@ namespace Xenon
         mFileLoggerCfg.truncate = truncate;
     }
 
-    std::string ApplicationLoggerConfiguration::getLabel() const
+    std::string ApplicationLoggerConfiguration::label() const
     {
         return mClientLabel;
     }
 
-    XN_NODISCARD const ConsoleLoggerConfiguration& ApplicationLoggerConfiguration::getConsoleLoggerCfg() const
+    XN_NODISCARD const ConsoleLoggerConfiguration& ApplicationLoggerConfiguration::consoleLoggerCfg() const
     {
         return mConsoleLoggerCfg;
     }
 
-    XN_NODISCARD const FileLoggerConfiguration& ApplicationLoggerConfiguration::getFileLoggerCfg() const
+    XN_NODISCARD const FileLoggerConfiguration& ApplicationLoggerConfiguration::fileLoggerCfg() const
     {
         return mFileLoggerCfg;
     }

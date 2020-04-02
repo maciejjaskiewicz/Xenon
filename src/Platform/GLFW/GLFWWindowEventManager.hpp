@@ -2,14 +2,14 @@
 
 #include <Xenon/Core/Window/WindowEventManager.hpp>
 
-#include "CommonWindow.hpp"
+#include "GLFWWindow.hpp"
 
 namespace Xenon
 {
-    class CommonWindowEventManager final : public WindowEventManager
+    class GLFWWindowEventManager final : public WindowEventManager
     {
     public:
-        explicit CommonWindowEventManager(Window& window);
+        explicit GLFWWindowEventManager(Window& window);
         void registerEvents() const override;
 
     private:

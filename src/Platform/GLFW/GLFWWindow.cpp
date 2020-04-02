@@ -1,29 +1,18 @@
-#include "CommonWindow.hpp"
+#include "GLFWWindow.hpp"
+
+#include <GLFW/glfw3.h>
 
 namespace Xenon
 {
-    CommonWindow::CommonWindow(const std::string& title, const WindowResolution& resolution,
-        const bool vSync, const bool maximized)
+    GLFWWindow::GLFWWindow(const WindowConfiguration& windowConfiguration)
     {
-        mData.title = title;
-        mData.resolution = resolution;
-        mData.vSync = vSync;
-        mData.maximized = maximized;
-
-        init();
+        mData.title = windowConfiguration.title;
+        mData.resolution = windowConfiguration.resolution;
+        mData.vSync = windowConfiguration.vSync;
+        mData.maximized = windowConfiguration.maximized;
     }
 
-    CommonWindow::CommonWindow(const ApplicationWindowConfiguration& windowConfiguration)
-    {
-        mData.title = windowConfiguration.getTitle();
-        mData.resolution = windowConfiguration.getResolution();
-        mData.vSync = windowConfiguration.vSync();
-        mData.maximized = windowConfiguration.isMaximized();
-
-        init();
-    }
-
-    void CommonWindow::init()
+    void GLFWWindow::init()
     {
         XN_ENG_INFO("Creating window: [{}]({}, {}), VSync: {}", mData.title,
             mData.resolution.width, mData.resolution.height, mData.vSync);
@@ -38,9 +27,9 @@ namespace Xenon
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
             glfwSetErrorCallback([](const int error, const char* description)
-                {
-                    XN_ENG_CRITICAL("GLFW Error: [{}] {}", error, description);
-                });
+            {
+                XN_ENG_CRITICAL("GLFW Error: [{}] {}", error, description);
+            });
 
             XN_ENG_DEBUG("GLFW successfully initialized");
         }
@@ -53,28 +42,29 @@ namespace Xenon
 
         glfwSetWindowUserPointer(mWindow, reinterpret_cast<void*>(&mData));
 
-        // Move graphics context class
-        glfwMakeContextCurrent(mWindow);
-        const auto gladStatus = gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
-        XN_ASSERT_COM(gladStatus, "Failed to initialize GLAD");
+        mGraphicsContext = GraphicsContext::create(reinterpret_cast<void*>(mWindow));
+        mGraphicsContext->init();
 
         setVSync(mData.vSync);
 
         sGLFWWindowCount++;
+        mInitialized = true;
     }
 
-    CommonWindow::~CommonWindow()
+    GLFWWindow::~GLFWWindow()
     {
         shutDown();
     }
 
-    void CommonWindow::update() const
+    void GLFWWindow::update() const
     {
+        XN_ASSERT_COM(mInitialized, "Window is uninitialized!");
+
         glfwPollEvents();
-        glfwSwapBuffers(mWindow);
+        mGraphicsContext->swapBuffers();
     }
 
-    void CommonWindow::setVSync(const bool enabled)
+    void GLFWWindow::setVSync(const bool enabled)
     {
         if (enabled)
         {
@@ -90,28 +80,31 @@ namespace Xenon
         mData.vSync = enabled;
     }
 
-    void* CommonWindow::window() const noexcept
+    void* GLFWWindow::window() const noexcept
     {
+        XN_ASSERT_COM(mInitialized, "Window is uninitialized!");
         return reinterpret_cast<void*>(mWindow);
     }
 
-    XN_NODISCARD WindowResolution CommonWindow::resolution() const noexcept
+    XN_NODISCARD WindowResolution GLFWWindow::resolution() const noexcept
     {
         return mData.resolution;
     }
 
-    XN_NODISCARD bool CommonWindow::vSync() const noexcept
+    XN_NODISCARD bool GLFWWindow::vSync() const noexcept
     {
         return mData.vSync;
     }
 
-    XN_NODISCARD bool CommonWindow::maximized() const noexcept
+    XN_NODISCARD bool GLFWWindow::maximized() const noexcept
     {
         return mData.maximized;
     }
 
-    void CommonWindow::shutDown() const
+    void GLFWWindow::shutDown() const
     {
+        XN_ASSERT_COM(mInitialized, "Window is uninitialized!");
+
         glfwDestroyWindow(mWindow);
         sGLFWWindowCount--;
 
