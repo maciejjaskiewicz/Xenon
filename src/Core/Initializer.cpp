@@ -3,6 +3,8 @@
 #include <Xenon/Core.hpp>
 #include <Xenon/Services/Log/Logger.hpp>
 #include <Xenon/Services/Event/EventBus.hpp>
+#include <Xenon/Graphics/RendererAPI.hpp>
+#include <Xenon/Graphics/Renderer.hpp>
 
 #include "InternalApplicationServices.hpp"
 #include "../Services/Log/InternalLogger.hpp"
@@ -17,6 +19,7 @@ namespace Xenon
         XN_ASSERT_COM(!initialized, "Already initialized!")
 
         initializeLogging(applicationConfiguration.loggerConfiguration);
+        initializeGraphicsAPI();
         initializeEventSystem();
         initializeInput();
 
@@ -26,7 +29,7 @@ namespace Xenon
 
     void Initializer::registerApplication(const std::shared_ptr<Application>& application)
     {
-        InternalApplicationServices::App::set(application);
+        InternalApplicationServices::Application::set(application);
     }
 
     void Initializer::assertIsInitialized()
@@ -38,7 +41,7 @@ namespace Xenon
     void Initializer::initializeLogging(const ApplicationLoggerConfiguration& logCfg)
     {
         using LogSinks = InternalApplicationServices::LogSinks;
-        using XenonLogger = InternalApplicationServices::Log;
+        using XenonLogger = InternalApplicationServices::Logger;
 
         // Init sinks
         LogSinks::Console::createAndSet<NullConsoleLogSink>();
@@ -71,6 +74,14 @@ namespace Xenon
 
         // Global log configuration
         GlobalLogConfiguration::sAppLoggerName = clientLogger->name();
+    }
+
+    void Initializer::initializeGraphicsAPI()
+    {
+        const auto rendererAPI = RendererAPI::createShared();
+        InternalApplicationServices::RendererAPI::set(rendererAPI);
+
+        ApplicationServices::Renderer::createAndSet<Renderer>();
     }
 
     void Initializer::initializeEventSystem()

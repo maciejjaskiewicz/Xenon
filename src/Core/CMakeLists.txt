@@ -6,6 +6,7 @@ set (XN_SOURCES_CORE_ROOT_L
     ${XN_INCROOT}/Api.hpp
     ${XN_INCROOT}/Log.hpp
     ${XN_INCROOT}/Main.hpp
+    ${XN_INCROOT}/DataType.hpp
     ${XN_SRCROOT}/Application.cpp
     ${XN_INCROOT}/Application.hpp
     ${XN_INCROOT}/ApplicationServices.hpp

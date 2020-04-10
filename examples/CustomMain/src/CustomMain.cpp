@@ -1,5 +1,6 @@
 #define XN_CUSTOM_MAIN
 #include <Xenon/Xenon.hpp>
+#include <Xenon/Graphics.hpp>
 
 class Custom final : public Xenon::Application
 {
@@ -12,7 +13,8 @@ public:
 
     void update() override
     {
-        
+        Xenon::RenderCmd::setClearColor(glm::vec4{ 0.2f, 0.3f, 0.3f, 1.0f });
+        Xenon::RenderCmd::clear();
     }
 };
 

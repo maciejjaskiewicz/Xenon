@@ -6,8 +6,6 @@
 #include "Events/WindowEvent.hpp"
 #include "Gui/Gui.hpp"
 
-#include <glm/glm.hpp>
-
 namespace Xenon
 {
     class Application
@@ -33,11 +31,7 @@ namespace Xenon
         std::unique_ptr<Window> mWindow;
         std::unique_ptr<Gui> mGui;
         bool mRunning{ true };
-        glm::vec4 mClearColor{ 0.2f, 0.3f, 0.3f, 1.0f };
 
         template<typename> friend class ApplicationBuilder;
-    private:
-        // Move to renderer
-        void clear() const;
     };
 }

@@ -1,4 +1,5 @@
 #include <Xenon/Xenon.hpp>
+#include <Xenon/Graphics.hpp>
 #include <Xenon/Core/Events/KeyEvent.hpp>
 
 #include <imgui.h>
@@ -21,10 +22,67 @@ public:
                 mRunning = false;
             }
         });
+
+        mVertexArray = Xenon::VertexArray::create();
+
+        float vertices[3 * 6] =
+        {
+            -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+             0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+             0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
+        };
+        mVertexBuffer = Xenon::VertexBuffer::create(vertices, sizeof(vertices));
+
+        const Xenon::BufferLayout layout =
+        {
+            { Xenon::DataType::Float3, "aPosition" },
+            { Xenon::DataType::Float3, "aColor" }
+        };
+        mVertexBuffer->setLayout(layout);
+
+        uint32_t indices[3] = { 0, 1, 2 };
+        mIndexBuffer = Xenon::IndexBuffer::create(indices, sizeof(indices) / sizeof(uint32_t));
+
+        mVertexArray->pushVertexBuffer(mVertexBuffer);
+        mVertexArray->bindIndexBuffer(mIndexBuffer);
+
+        const std::string vertexShaderSrc = R"(
+            #version 330 core
+
+            layout (location = 0) in vec3 aPosition;
+            layout (location = 1) in vec3 aColor;
+
+            out vec3 vColor;
+
+            void main()
+            {
+                gl_Position = vec4(aPosition, 1.0);
+                vColor = aColor;
+            }
+        )";
+
+        const std::string fragmentShaderSrc = R"(
+            #version 330 core
+
+            out vec4 color;
+            in vec3 vColor;
+
+            void main()
+            {
+                color = vec4(vColor, 1.0);
+            }
+        )";
+
+        mShader = Xenon::Shader::create(vertexShaderSrc, fragmentShaderSrc);
     }
 
     void update() override
     {
+        auto& renderer = Services::Renderer::ref();
+
+        Xenon::RenderCmd::setClearColor(mClearColor);
+        Xenon::RenderCmd::clear();
+
         if(Services::Input::ref().isKeyPressed(Xenon::KeyCode::Space))
         {
             XN_DEBUG("Space is pressed");
@@ -37,6 +95,13 @@ public:
             XN_DEBUG("Right mouse button is pressed");
             XN_DEBUG("Mouse possition: X={}, Y={}", x, y);
         }
+
+        renderer.beginScene();
+
+        mShader->bind();
+        renderer.submit(mVertexArray);
+
+        renderer.endScene();
     }
 
     void updateGui() override
@@ -65,6 +130,13 @@ public:
 
 private:
     inline static bool mShowImGuiDemo{ false };
+
+    glm::vec4 mClearColor{ 0.2f, 0.3f, 0.3f, 1.0f };
+
+    std::shared_ptr<Xenon::VertexBuffer> mVertexBuffer;
+    std::shared_ptr<Xenon::IndexBuffer> mIndexBuffer;
+    std::shared_ptr<Xenon::VertexArray> mVertexArray;
+    std::shared_ptr<Xenon::Shader> mShader;
 };
 XN_REGISTER_APPLICATION(Sandbox);
 

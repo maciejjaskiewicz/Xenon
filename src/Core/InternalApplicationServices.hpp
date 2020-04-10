@@ -9,11 +9,13 @@ namespace Xenon
 {
     class Application;
     class Logger;
+    class RendererAPI;
 
     struct InternalApplicationServices
     {
-        using App = ImmutableServiceLocator<Application>;
-        using Log = ImmutableServiceLocator<Logger>;
+        using Application = ImmutableServiceLocator<Xenon::Application>;
+        using Logger = ImmutableServiceLocator<Xenon::Logger>;
+        using RendererAPI = ImmutableServiceLocator<Xenon::RendererAPI>;
 
         struct LogSinks
         {
@@ -23,8 +25,9 @@ namespace Xenon
 
         static void assertIsInitialized()
         {
-            App::assertIsNotEmpty();
-            Log::assertIsNotEmpty();
+            Application::assertIsNotEmpty();
+            Logger::assertIsNotEmpty();
+            RendererAPI::assertIsNotEmpty();
 
             XN_ASSERT_COM(!LogSinks::Console::empty(), "Uninitialized");
             XN_ASSERT_COM(!LogSinks::File::empty(), "Uninitialized");

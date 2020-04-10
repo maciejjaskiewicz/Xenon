@@ -19,6 +19,7 @@ namespace Xenon
         static void assertIsInitialized();
     private:
         static void initializeLogging(const ApplicationLoggerConfiguration& logCfg);
+        static void initializeGraphicsAPI();
         static void initializeEventSystem();
         static void initializeInput();
     };

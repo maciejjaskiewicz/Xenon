@@ -20,6 +20,16 @@ set (XN_SOURCES_PLATFORM_OPENGL_L
     ${XN_SRCROOT}/OpenGL/OpenGLGui.hpp
     ${XN_SRCROOT}/OpenGL/OpenGLContext.cpp
     ${XN_SRCROOT}/OpenGL/OpenGLContext.hpp
+    ${XN_SRCROOT}/OpenGL/OpenGLVertexBuffer.cpp
+    ${XN_SRCROOT}/OpenGL/OpenGLVertexBuffer.hpp
+    ${XN_SRCROOT}/OpenGL/OpenGLIndexBuffer.cpp
+    ${XN_SRCROOT}/OpenGL/OpenGLIndexBuffer.hpp
+    ${XN_SRCROOT}/OpenGL/OpenGLVertexArray.cpp
+    ${XN_SRCROOT}/OpenGL/OpenGLVertexArray.hpp
+    ${XN_SRCROOT}/OpenGL/OpenGLShader.cpp
+    ${XN_SRCROOT}/OpenGL/OpenGLShader.hpp
+    ${XN_SRCROOT}/OpenGL/OpenGLRendererAPI.cpp
+    ${XN_SRCROOT}/OpenGL/OpenGLRendererAPI.hpp
 )
 
 set (XN_SOURCES_PLATFORM_OPENGL
