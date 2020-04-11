@@ -11,7 +11,7 @@ public:
         Services::Logger::ref().info("Client test");
     }
 
-    void update() override
+    void update(const Xenon::DeltaTime& deltaTime) override
     {
         Xenon::RenderCmd::setClearColor(glm::vec4{ 0.2f, 0.3f, 0.3f, 1.0f });
         Xenon::RenderCmd::clear();

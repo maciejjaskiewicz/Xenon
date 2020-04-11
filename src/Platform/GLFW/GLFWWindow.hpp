@@ -18,6 +18,7 @@ namespace Xenon
         WindowResolution resolution{};
         bool vSync{ false };
         bool maximized{ false };
+        bool minimized{ false };
     };
 
     class GLFWWindow final : public Window
@@ -34,6 +35,7 @@ namespace Xenon
         XN_NODISCARD WindowResolution resolution() const noexcept override;
         XN_NODISCARD bool vSync() const noexcept override;
         XN_NODISCARD bool maximized() const noexcept override;
+        XN_NODISCARD bool minimized() const noexcept override;
 
     private:
         void shutDown() const;

@@ -5,6 +5,7 @@
 #include "Window/Window.hpp"
 #include "Events/WindowEvent.hpp"
 #include "Gui/Gui.hpp"
+#include "../Utils/DeltaTime.hpp"
 
 namespace Xenon
 {
@@ -24,7 +25,7 @@ namespace Xenon
     protected:
         explicit Application(const ApplicationConfiguration&);
 
-        virtual void update() = 0;
+        virtual void update(const DeltaTime& deltaTime) = 0;
         virtual void updateGui();
         virtual void onCloseEvent(const WindowCloseEvent&);
 

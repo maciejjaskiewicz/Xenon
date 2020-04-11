@@ -19,4 +19,10 @@ namespace Xenon
     {
         InternalApplicationServices::RendererAPI::ref().draw(vertexArray);
     }
+
+    void RenderCmd::setViewport(const uint32_t x, const uint32_t y, 
+        const uint32_t width, const uint32_t height)
+    {
+        InternalApplicationServices::RendererAPI::ref().setViewport(x, y, width, height);
+    }
 }

@@ -61,7 +61,11 @@ namespace Xenon
         XN_ASSERT_COM(mInitialized, "Window is uninitialized!");
 
         glfwPollEvents();
-        mGraphicsContext->swapBuffers();
+
+        if(!mData.minimized)
+        {
+            mGraphicsContext->swapBuffers();
+        }
     }
 
     void GLFWWindow::setVSync(const bool enabled)
@@ -99,6 +103,11 @@ namespace Xenon
     XN_NODISCARD bool GLFWWindow::maximized() const noexcept
     {
         return mData.maximized;
+    }
+
+    XN_NODISCARD bool GLFWWindow::minimized() const noexcept
+    {
+        return mData.minimized;
     }
 
     void GLFWWindow::shutDown() const

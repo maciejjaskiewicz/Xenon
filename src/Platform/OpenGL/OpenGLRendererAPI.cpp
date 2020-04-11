@@ -30,4 +30,10 @@ namespace Xenon
             glDrawElements(GL_TRIANGLES, sVertexArray->indexBuffer().count(), GL_UNSIGNED_INT, nullptr);
         }
     }
+
+    void OpenGLRendererAPI::setViewport(const uint32_t x, const uint32_t y, 
+        const uint32_t width, const uint32_t height)
+    {
+        glViewport(x, y, width, height);
+    }
 }

@@ -34,6 +34,7 @@ namespace Xenon
         XN_NODISCARD virtual WindowResolution resolution() const noexcept = 0;
         XN_NODISCARD virtual bool vSync() const noexcept = 0;
         XN_NODISCARD virtual bool maximized() const noexcept = 0;
+        XN_NODISCARD virtual bool minimized() const noexcept = 0;
 
         XN_NODISCARD static std::unique_ptr<Window> create(const WindowConfiguration& windowConfiguration);
     };

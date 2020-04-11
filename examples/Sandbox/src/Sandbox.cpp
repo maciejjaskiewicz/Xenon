@@ -1,6 +1,6 @@
 #include <Xenon/Xenon.hpp>
 #include <Xenon/Graphics.hpp>
-#include <Xenon/Core/Events/KeyEvent.hpp>
+#include <Xenon/Services/Time/Timer.hpp>
 
 #include <imgui.h>
 #include <glm/gtc/type_ptr.hpp>
@@ -76,7 +76,7 @@ public:
         mShader = Xenon::Shader::create(vertexShaderSrc, fragmentShaderSrc);
     }
 
-    void update() override
+    void update(const Xenon::DeltaTime& deltaTime) override
     {
         auto& renderer = Services::Renderer::ref();
 

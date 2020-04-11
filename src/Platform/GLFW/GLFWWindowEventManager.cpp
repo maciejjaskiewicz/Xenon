@@ -17,6 +17,7 @@ namespace Xenon
     {
         glfwSetWindowCloseCallback(mWindow, windowCloseCallback);
         glfwSetWindowSizeCallback(mWindow, windowSizeCallback);
+        glfwSetWindowMaximizeCallback(mWindow, windowMaximizeCallback);
         glfwSetKeyCallback(mWindow, keyCallback);
         glfwSetCharCallback(mWindow, charCallback);
         glfwSetMouseButtonCallback(mWindow, mouseButtonCallback);
@@ -35,8 +36,16 @@ namespace Xenon
 
         windowData->resolution.width = width;
         windowData->resolution.height = height;
+        windowData->minimized = (width == 0 || height == 0);
 
         ApplicationServices::EventBus::ref().trigger<WindowResizeEvent>(windowData->resolution);
+    }
+
+    void GLFWWindowEventManager::windowMaximizeCallback(GLFWwindow* window, const int maximized)
+    {
+        auto* windowData = reinterpret_cast<WindowData*>(glfwGetWindowUserPointer(window));
+
+        windowData->maximized = (maximized == GLFW_TRUE);
     }
 
     void GLFWWindowEventManager::keyCallback(GLFWwindow* window, const int key, const int scanCode, const int action, const int mods)

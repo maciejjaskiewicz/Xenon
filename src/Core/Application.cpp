@@ -2,11 +2,15 @@
 
 #include <Xenon/Core/Window/WindowEventManager.hpp>
 #include <Xenon/Core/Input/Input.hpp>
+#include <Xenon/Graphics/Renderer.hpp>
+#include <Xenon/Services/Time/Timer.hpp>
 
 namespace Xenon
 {
     Application::Application(const ApplicationConfiguration& config)
     {
+        Services::Timer::createAndSet<Timer>();
+
         mWindow = Window::create(WindowConfiguration(config.windowConfiguration));
         mWindow->init();
 
@@ -34,10 +38,17 @@ namespace Xenon
 
     void Application::run()
     {
+        DeltaTime deltaTime(Services::Timer::ref().elapsed());
+
         while (mRunning)
         {
+            deltaTime.update(Services::Timer::ref().elapsed());
             Services::EventBus::ref().update();
-            this->update();
+
+            if(!mWindow->minimized())
+            {
+                this->update(deltaTime);
+            }
 
             mGui->newFrame();
             updateGui();
