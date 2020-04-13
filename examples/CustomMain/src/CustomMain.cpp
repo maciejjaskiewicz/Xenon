@@ -15,6 +15,7 @@ public:
     {
         Xenon::RenderCmd::setClearColor(glm::vec4{ 0.2f, 0.3f, 0.3f, 1.0f });
         Xenon::RenderCmd::clear();
+        XN_INFO(deltaTime);
     }
 };
 

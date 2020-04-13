@@ -17,14 +17,11 @@ source_group("" FILES ${TEST_MAIN})
 source_group("Utils" FILES ${TEST_UTILS})
 
 add_executable(XenonTest ${TEST_SOURCES})
-target_link_libraries(XenonTest 
+target_link_libraries(XenonTest PRIVATE
+    Xenon::Options
+    Xenon::Warnings
     CONAN_PKG::gtest
     Xenon::Engine
 )
 
 gtest_discover_tests(XenonTest)
-
-# disable PDBs warning for MSVC
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    set_target_properties(XenonTest PROPERTIES LINK_FLAGS "/ignore:4099")
-endif()

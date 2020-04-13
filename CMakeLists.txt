@@ -1,18 +1,9 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.15)
 
 project(Xenon CXX)
 
-# configure Conan
-if(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)
-    include(${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake)
-else()
-    include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-endif()
-
-conan_basic_setup(TARGETS)
-
-# configure CMake module path and include macros
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+# configure CMake modules and include macros
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 include(MacroLibrary)
 
 # require out-of-source builds
@@ -21,6 +12,10 @@ ENSURE_OUT_OF_SOURCE_BUILD(
      Please make a build subdirectory. Feel free to remove CMakeCache.txt and CMakeFiles."
 )
 
+#include and apply Xenon settings
+include(Settings)
+include(StaticAnalyzers)
+
 # general configuration
 if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
     set(XENON_STANDALONE TRUE)
@@ -28,32 +23,37 @@ endif()
 
 option(XENON_BUILD_EXAMPLES "Build the Xenon example programs" ${XENON_STANDALONE})
 option(XENON_BUILD_TESTS "Build the Xenon test programs" ${XENON_STANDALONE})
+option(XENON_BUILD_VEROSE "Build Xenon with Verbose mode" OFF)
 
-# enable project folders
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMake")
+# libraries with the predefined project configuration to use by clients 
+add_library(XenonOptions INTERFACE)
+target_compile_features(XenonOptions INTERFACE cxx_std_17)
+add_library(Xenon::Options ALIAS XenonOptions)
 
-# set up our directory structure for output libraries and binaries
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+add_library(XenonWarnings INTERFACE)
+add_library(Xenon::Warnings ALIAS XenonWarnings)
 
-# set a default build type if none was specified
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Debug)
-endif()
+# Standard Precompiled Header
+include(PrecompiledHeader)
+set_standard_pch(XenonOptions)
 
-# compiler config
-if (NOT CMAKE_CXX_STANDARD)
-    set(CMAKE_CXX_STANDARD 17)
-    set(CMAKE_CXX_STANDARD_REQUIRED ON)
-endif()
+# standard compiler warnings
+include(Warnings)
+set_project_warnings(XenonWarnings)
 
-set(CMAKE_CXX_EXTENSIONS OFF)
+# sanitizer options if supported by compiler
+include(Sanitizers)
+enable_sanitizers(XenonOptions)
 
-# fetch and configure third party libraries
+# fetch and configure third party libraries with Conan or FetchContent 
+include(Conan)
+conan_cmake_run(CONANFILE conanfile.txt
+    BASIC_SETUP CMAKE_TARGETS
+    BUILD missing
+)
+
 include(FetchContent)
-SET(FETCHCONTENT_QUIET OFF)
+SET(FETCHCONTENT_QUIET XENON_BUILD_VEROSE)
 
 include(FetchGLFW)
 include(FetchImGui)

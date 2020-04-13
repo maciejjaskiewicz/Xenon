@@ -34,8 +34,8 @@ namespace Xenon
     {
         auto* windowData = reinterpret_cast<WindowData*>(glfwGetWindowUserPointer(window));
 
-        windowData->resolution.width = width;
-        windowData->resolution.height = height;
+        windowData->resolution.width = static_cast<uint32_t>(width);
+        windowData->resolution.height = static_cast<uint32_t>(height);
         windowData->minimized = (width == 0 || height == 0);
 
         ApplicationServices::EventBus::ref().trigger<WindowResizeEvent>(windowData->resolution);

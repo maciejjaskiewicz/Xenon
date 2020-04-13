@@ -138,7 +138,7 @@ private:
     std::shared_ptr<Xenon::VertexArray> mVertexArray;
     std::shared_ptr<Xenon::Shader> mShader;
 };
-XN_REGISTER_APPLICATION(Sandbox);
+XN_REGISTER_APPLICATION(Sandbox)
 
 void Xenon::configureApplication(IApplicationBuilder<Sandbox>& applicationBuilder)
 {

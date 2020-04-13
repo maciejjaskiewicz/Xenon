@@ -26,7 +26,7 @@ namespace Xenon
 
     void OpenGLVertexArray::pushVertexBuffer(std::weak_ptr<VertexBuffer> vertexBuffer)
     {
-        constexpr auto toGLType = [](const DataType dataType) constexpr -> uint32_t
+        constexpr auto toGLType = [](const DataType dataType) constexpr -> GLenum
         {
             switch (dataType)
             {
@@ -59,12 +59,14 @@ namespace Xenon
                 glEnableVertexAttribArray(mVertexAttributeIdx);
 
                 GLvoid const* offset = static_cast<char const*>(nullptr) + element.offset;
+                const auto stride = static_cast<GLsizei>(sVertexBuffer->layout().stride());
+
                 glVertexAttribPointer(
                     mVertexAttributeIdx,
-                    DataTypeInfo::componentCount(element.type),
+                    static_cast<GLint>(DataTypeInfo::componentCount(element.type)),
                     toGLType(element.type),
                     element.normalized ? GL_TRUE : GL_FALSE,
-                    sVertexBuffer->layout().stride(),
+                    stride,
                     offset
                 );
 

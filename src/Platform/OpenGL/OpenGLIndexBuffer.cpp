@@ -10,7 +10,7 @@ namespace Xenon
         glGenBuffers(1, &mIndexBufferId);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIndexBufferId);
 
-        const auto bufferSize = sizeof(uint32_t) * count;
+        const auto bufferSize = static_cast<GLsizeiptr>(sizeof(uint32_t) * count);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, bufferSize, indices, GL_STATIC_DRAW);
     }
 

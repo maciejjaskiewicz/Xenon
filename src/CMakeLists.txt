@@ -46,12 +46,28 @@ add_library(Xenon STATIC ${XN_INCLUDES} ${XN_SOURCES})
 add_library(Xenon::Engine ALIAS Xenon)
 
 # link third party libraries
+include(LinkLibraries)
+
 find_package(OpenGL REQUIRED)
 
-target_link_libraries(Xenon OpenGL::GL)
-target_link_libraries(Xenon glfw)
-target_link_libraries(Xenon ImGui)
-conan_target_link_libraries(Xenon)
+target_link_libraries(Xenon PRIVATE
+    Xenon::Options
+    Xenon::Warnings
+    OpenGL::GL
+    
+)
+
+target_link_libraries_sys_private(Xenon
+    glfw
+    CONAN_PKG::glad
+)
+
+target_link_libraries_sys_public(Xenon
+    CONAN_PKG::fmt
+    CONAN_PKG::spdlog
+    CONAN_PKG::glm
+    ImGui
+)
 
 # set include directories
 target_include_directories(Xenon PUBLIC ${PROJECT_SOURCE_DIR}/include)
@@ -62,7 +78,12 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(Xenon PUBLIC XN_MODE_DEBUG)
 endif()
 
-# disable PDBs warning for MSVC
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    set_target_properties(Xenon PROPERTIES LINK_FLAGS "/ignore:4099")
-endif()
+# set Xenon Precompiled Header
+set (XN_PCH_HEADERS
+    ${XN_INCROOT}/Core/Api.hpp
+    ${XN_INCROOT}/Core/Log.hpp
+    ${XN_INCROOT}/Core/DataType.hpp
+    ${XN_INCROOT}/Utils/Delegate.hpp
+)
+
+target_precompile_headers(XenonOptions INTERFACE ${XN_PCH_HEADERS})

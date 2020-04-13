@@ -1,0 +1,22 @@
+dist: bionic
+sudo: false
+language: cpp
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-snapshot
+
+install:
+  - pip install --user conan cmake
+
+before_script:
+  - mkdir build
+  - cd build
+
+script:
+  - CXX=/usr/bin/gcc-10 CC=/usr/bin/g++-10 cmake ..
+  - cmake --build . -- -j2
+  - ctest -j2

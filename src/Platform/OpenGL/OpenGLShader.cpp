@@ -87,7 +87,7 @@ namespace Xenon
             auto maxLength = 0;
             glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &maxLength);
 
-            std::vector<GLchar> infoLog(maxLength);
+            std::vector<GLchar> infoLog(static_cast<std::size_t>(maxLength));
             glGetShaderInfoLog(shaderId, maxLength, &maxLength, &infoLog[0]);
 
             glDeleteShader(shaderId);
@@ -119,7 +119,7 @@ namespace Xenon
             auto maxLength = 0;
             glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &maxLength);
 
-            std::vector<GLchar> infoLog(maxLength);
+            std::vector<GLchar> infoLog(static_cast<std::size_t>(maxLength));
             glGetProgramInfoLog(programId, maxLength, &maxLength, &infoLog[0]);
 
             glDeleteProgram(programId);
