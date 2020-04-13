@@ -2,12 +2,25 @@ dist: bionic
 sudo: false
 language: cpp
 
+compiler:
+  - gcc
+
 addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - gcc-snapshot
+      - gcc-8
+      - g++-8
+      - libxrandr-dev
+      - libxinerama-dev
+      - libxcursor-dev
+      - libxi-dev
+      - libgl1-mesa-dev
+
+env:
+  -CC=gcc-8
+  -CXX=g++-8
 
 install:
   - pip install --user conan cmake
@@ -17,6 +30,6 @@ before_script:
   - cd build
 
 script:
-  - CXX=/usr/bin/gcc-10 CC=/usr/bin/g++-10 cmake ..
+  - cmake -DCMAKE_BUILD_TYPE=Release ..
   - cmake --build . -- -j2
   - ctest -j2

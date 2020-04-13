@@ -28,6 +28,10 @@
  * Debug and assertion
  */
 
+#ifndef XN_UNUSED
+    #define XN_UNUSED(x) ((void)(x));
+#endif
+
 #ifdef XN_MODE_DEBUG
 	#define XN_ENABLE_ASSERTS
 #endif
@@ -43,9 +47,9 @@
     #define XN_ASSERT_COM(x, comment) { if(!(x)) { XN_ENG_CRITICAL("Assertion Failed: {}", comment); DEBUG_BREAK; } }
     #define XN_ASSERT_FMT(x, fmt, ...) { if(!(x)) { XN_ENG_CRITICAL(std::string("Assertion Failed: ") + fmt, __VA_ARGS__); DEBUG_BREAK; } }
 #else
-    #define XN_ASSERT(x)
-    #define XN_ASSERT_COM(x, comment)
-    #define XN_ASSERT_FMT(x, fmt, ...)
+    #define XN_ASSERT(x) XN_UNUSED(x)
+    #define XN_ASSERT_COM(x, comment) XN_UNUSED(x)
+    #define XN_ASSERT_FMT(x, fmt, ...) XN_UNUSED(x)
 #endif
 
 /*
