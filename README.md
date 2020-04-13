@@ -1,9 +1,15 @@
 <h1 align="center" style="border-bottom: none;">Xenon</h1>
 <h3 align="center">Cross-platform multi-media engine</h3>
 <p align="center">
-  <img src="https://img.shields.io/travis/maciejjaskiewicz/Xenon" />
-  <img src="https://img.shields.io/badge/platform-Windows | Linux-blue" />
-  <img src="https://img.shields.io/badge/license-MIT-lightgrey" />
+  <a href="https://travis-ci.org/github/maciejjaskiewicz/Xenon">
+    <img alt="build" src="https://img.shields.io/travis/maciejjaskiewicz/Xenon" />
+  </a>
+  <a href="https://github.com/maciejjaskiewicz/Xenon">
+    <img src="https://img.shields.io/badge/platform-Windows | Linux-blue" />
+  </a>
+  <a href="https://github.com/maciejjaskiewicz/Xenon">
+    <img src="https://img.shields.io/badge/license-MIT-lightgrey" />
+  </a>
 </p>
 
 ## Building
