@@ -1,9 +1,9 @@
 #include "GLFWWindowEventManager.hpp"
 
-#include <Xenon/Core/ApplicationServices.hpp>
-#include <Xenon/Core/Events/WindowEvent.hpp>
-#include <Xenon/Core/Events/KeyEvent.hpp>
-#include <Xenon/Core/Events/MouseEvent.hpp>
+#include <Core/ApplicationServices.hpp>
+#include <Core/Events/WindowEvent.hpp>
+#include <Core/Events/KeyEvent.hpp>
+#include <Core/Events/MouseEvent.hpp>
 
 #include <GLFW/glfw3.h>
 

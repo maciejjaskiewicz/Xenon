@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../../Core/Api.hpp"
+#include "Xenon/Core/Api.hpp"
+
 #include <chrono>
 
 namespace Xenon

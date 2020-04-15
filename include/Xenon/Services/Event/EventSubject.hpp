@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Event.hpp"
-#include "../../Core/Api.hpp"
-#include "../../Utils/Delegate.hpp"
+#include "Xenon/Core/Api.hpp"
+#include "Xenon/Utils/Delegate.hpp"
 
 #include <vector>
 #include <utility>

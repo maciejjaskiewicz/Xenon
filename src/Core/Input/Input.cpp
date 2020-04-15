@@ -1,6 +1,6 @@
-#include <Xenon/Core/Input/Input.hpp>
+#include <Core/Input/Input.hpp>
 
-#include "../../Platform/GLFW/GLFWInput.hpp"
+#include "Platform/GLFW/GLFWInput.hpp"
 
 namespace Xenon
 {

@@ -1,6 +1,6 @@
-#include <Xenon/Graphics/RendererAPI.hpp>
+#include <Graphics/API/RendererAPI.hpp>
 
-#include "../Platform/OpenGL/OpenGLRendererAPI.hpp"
+#include "Platform/OpenGL/OpenGLRendererAPI.hpp"
 
 namespace Xenon
 {

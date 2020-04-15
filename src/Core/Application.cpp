@@ -1,9 +1,9 @@
-#include <Xenon/Core/Application.hpp>
+#include <Core/Application.hpp>
 
-#include <Xenon/Core/Window/WindowEventManager.hpp>
-#include <Xenon/Core/Input/Input.hpp>
-#include <Xenon/Graphics/Renderer.hpp>
-#include <Xenon/Services/Time/Timer.hpp>
+#include <Core/Window/WindowEventManager.hpp>
+#include <Core/Input/Input.hpp>
+#include <Graphics/Renderer.hpp>
+#include <Services/Time/Timer.hpp>
 
 namespace Xenon
 {
@@ -51,13 +51,13 @@ namespace Xenon
             }
 
             mGui->newFrame();
-            updateGui();
+            updateGui(deltaTime);
             mGui->render();
 
             mWindow->update();
         }
     }
 
-    void Application::updateGui()
+    void Application::updateGui(const DeltaTime& deltaTime)
     { }
 }

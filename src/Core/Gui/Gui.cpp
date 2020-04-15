@@ -1,6 +1,6 @@
 #include <Xenon/Core/Gui/Gui.hpp>
 
-#include "../../Platform/OpenGL/OpenGLGui.hpp"
+#include "Platform/OpenGL/OpenGLGui.hpp"
 
 namespace Xenon
 {

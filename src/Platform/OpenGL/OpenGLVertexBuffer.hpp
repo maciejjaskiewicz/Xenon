@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Xenon/Graphics/VertexBuffer.hpp>
+#include <Graphics/API/VertexBuffer.hpp>
 
 namespace Xenon
 {

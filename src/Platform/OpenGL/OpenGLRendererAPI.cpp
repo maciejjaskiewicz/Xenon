@@ -36,4 +36,15 @@ namespace Xenon
     {
         glViewport(x, y, width, height);
     }
+
+    RendererAPIDetails OpenGLRendererAPI::fetchRendererDetails()
+    {
+        return RendererAPIDetails
+        {
+            "OpenGL",
+            fmt::format("{}", glGetString(GL_VERSION)),
+            fmt::format("{}", glGetString(GL_VENDOR)),
+            fmt::format("{}", glGetString(GL_RENDERER)),
+        };
+    }
 }

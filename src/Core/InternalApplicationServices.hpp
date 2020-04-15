@@ -1,9 +1,8 @@
 #pragma once
 
-#include <Xenon/Utils/ServiceLocator.hpp>
-#include <Xenon/Utils/ImmutableServiceLocator.hpp>
-
-#include "../Services/Log/LogSink.hpp"
+#include <Utils/ServiceLocator.hpp>
+#include <Utils/ImmutableServiceLocator.hpp>
+#include "Services/Log/LogSink.hpp"
 
 namespace Xenon
 {

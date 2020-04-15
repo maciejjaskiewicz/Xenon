@@ -2,7 +2,7 @@
 
 #include "KeyCode.hpp"
 #include "MouseCode.hpp"
-#include "../Window/Window.hpp"
+#include "Xenon/Core/Window/Window.hpp"
 
 #include <utility>
 #include <memory>

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Xenon/Core/Api.hpp"
+
 #include <cstdint>
 
 namespace Xenon
@@ -9,6 +11,12 @@ namespace Xenon
         explicit WindowResolution(const uint32_t windowWidth = 1280,
             const uint32_t windowHeight = 720) : width(windowWidth), height(windowHeight)
         { }
+
+        XN_NODISCARD float aspectRatio() const
+        {
+            if(width == 0 || height == 0) return 0.0f;
+            return static_cast<float>(width) / static_cast<float>(height);
+        }
 
         uint32_t width;
         uint32_t height;

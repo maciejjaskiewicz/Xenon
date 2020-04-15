@@ -1,6 +1,6 @@
-#include <Xenon/Graphics/VertexArray.hpp>
+#include <Graphics/API/VertexArray.hpp>
 
-#include "../Platform/OpenGL/OpenGLVertexArray.hpp"
+#include "Platform/OpenGL/OpenGLVertexArray.hpp"
 
 namespace Xenon
 {

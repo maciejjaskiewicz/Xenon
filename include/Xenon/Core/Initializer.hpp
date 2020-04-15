@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Config.hpp"
+#include "Xenon/Config.hpp"
 #include <memory>
 
 namespace Xenon

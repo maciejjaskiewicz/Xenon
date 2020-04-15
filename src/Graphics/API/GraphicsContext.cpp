@@ -1,6 +1,6 @@
-#include <Xenon/Graphics/GraphicsContext.hpp>
+#include <Graphics/API/GraphicsContext.hpp>
 
-#include "../Platform/OpenGL/OpenGLContext.hpp"
+#include "Platform/OpenGL/OpenGLContext.hpp"
 
 namespace Xenon
 {

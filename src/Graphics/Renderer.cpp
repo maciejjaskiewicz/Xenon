@@ -1,10 +1,10 @@
-#include <Xenon/Graphics/Renderer.hpp>
-#include <Xenon/Graphics/RendererAPI.hpp>
-#include <Xenon/Graphics/RenderCmd.hpp>
-#include <Xenon/Core/ApplicationServices.hpp>
-#include <Xenon/Core/Events/WindowEvent.hpp>
+#include <Graphics/Renderer.hpp>
 
-#include "../Core/InternalApplicationServices.hpp"
+#include <Graphics/API/RendererAPI.hpp>
+#include <Graphics/RenderCmd.hpp>
+#include <Core/ApplicationServices.hpp>
+#include <Core/Events/WindowEvent.hpp>
+#include "Core/InternalApplicationServices.hpp"
 
 namespace Xenon
 {
@@ -19,20 +19,36 @@ namespace Xenon
         {
             RenderCmd::setViewport(0, 0, event.resolution.width, event.resolution.height);
         });
+
+        mAPIDetails = InternalApplicationServices::RendererAPI::ref().fetchRendererDetails();
     }
 
-    void Renderer::beginScene()
+    void Renderer::beginScene(const Camera& camera)
     {
-
+        mViewProjectionMatrix = camera.viewProjectionMatrix();
     }
 
     void Renderer::endScene()
     {
     }
 
-    void Renderer::submit(const std::weak_ptr<VertexArray>& vertexArray)
+    void Renderer::submit(const std::weak_ptr<Shader>& shader, const std::weak_ptr<VertexArray>& vertexArray) const
     {
-        vertexArray.lock()->bind();
-        RenderCmd::draw(vertexArray);
+        const auto sShader = shader.lock();
+        const auto sVertexArray = vertexArray.lock();
+
+        if(sShader && sVertexArray)
+        {
+            sShader->bind();
+            sShader->setMat4("uViewProjection", mViewProjectionMatrix);
+
+            sVertexArray->bind();
+            RenderCmd::draw(vertexArray);
+        }
+    }
+
+    XN_NODISCARD const RendererAPIDetails& Renderer::getDetails() const
+    {
+        return mAPIDetails;
     }
 }

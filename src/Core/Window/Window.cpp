@@ -1,6 +1,6 @@
-#include <Xenon/Core/Window/Window.hpp>
+#include <Core/Window/Window.hpp>
 
-#include "../../Platform/GLFW/GLFWWindow.hpp"
+#include "Platform/GLFW/GLFWWindow.hpp"
 
 namespace Xenon
 {

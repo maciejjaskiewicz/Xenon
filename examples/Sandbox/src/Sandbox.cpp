@@ -27,8 +27,8 @@ public:
 
         float vertices[3 * 6] =
         {
-            -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-             0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+            -0.75f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+             0.75f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
              0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
         };
         mVertexBuffer = Xenon::VertexBuffer::create(vertices, sizeof(vertices));
@@ -52,11 +52,13 @@ public:
             layout (location = 0) in vec3 aPosition;
             layout (location = 1) in vec3 aColor;
 
+            uniform mat4 uViewProjection;
+
             out vec3 vColor;
 
             void main()
             {
-                gl_Position = vec4(aPosition, 1.0);
+                gl_Position = uViewProjection * vec4(aPosition, 1.0);
                 vColor = aColor;
             }
         )";
@@ -74,6 +76,10 @@ public:
         )";
 
         mShader = Xenon::Shader::create(vertexShaderSrc, fragmentShaderSrc);
+
+        mCameraController = std::make_unique<Xenon::OrthographicCameraController>(
+            config.windowConfiguration.resolution().aspectRatio(), true
+        );
     }
 
     void update(const Xenon::DeltaTime& deltaTime) override
@@ -83,35 +89,25 @@ public:
         Xenon::RenderCmd::setClearColor(mClearColor);
         Xenon::RenderCmd::clear();
 
-        if(Services::Input::ref().isKeyPressed(Xenon::KeyCode::Space))
-        {
-            XN_DEBUG("Space is pressed");
-        }
+        mCameraController->update(deltaTime);
 
-        if (Services::Input::ref().isMouseButtonPressed(Xenon::MouseButtonCode::ButtonRight))
-        {
-            auto [x, y] = Services::Input::ref().mousePosition();
-
-            XN_DEBUG("Right mouse button is pressed");
-            XN_DEBUG("Mouse possition: X={}, Y={}", x, y);
-        }
-
-        renderer.beginScene();
-
-        mShader->bind();
-        renderer.submit(mVertexArray);
-
+        renderer.beginScene(mCameraController->camera());
+        renderer.submit(mShader, mVertexArray);
         renderer.endScene();
     }
 
-    void updateGui() override
+    void updateGui(const Xenon::DeltaTime& deltaTime) override
     {
-        ImGui::Begin("Debug");
+        ImGui::Begin("Application Debug");
 
-        auto& io = ImGui::GetIO();
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-        ImGui::Text("%d vertices, %d indices (%d triangles)", io.MetricsRenderVertices, io.MetricsRenderIndices, io.MetricsRenderIndices / 3);
-        ImGui::Text("%d active windows (%d visible)", io.MetricsActiveWindows, io.MetricsRenderWindows);
+        const auto rendererDetails = Services::Renderer::ref().getDetails();
+
+        ImGui::Text("API: %s %s", rendererDetails.name.c_str(), rendererDetails.version.c_str());
+        ImGui::Text("Vendor: %s", rendererDetails.vendor.c_str());
+        ImGui::Text("Renderer: %s", rendererDetails.renderer.c_str());
+        ImGui::Text("Up time: %.2f s", Services::Timer::ref().elapsed());
+        ImGui::Text("Frame rate: %.3f ms/frame (%.1f FPS)", deltaTime.milliseconds(), 1000.0f / deltaTime.milliseconds());
+        
         ImGui::Separator();
 
         ImGui::ColorEdit4("Clear Color", glm::value_ptr(mClearColor));
@@ -126,17 +122,21 @@ public:
         {
             ImGui::ShowDemoWindow(&mShowImGuiDemo);
         }
+
+        mCameraController->updateDebugGui(deltaTime);
     }
 
 private:
     inline static bool mShowImGuiDemo{ false };
 
-    glm::vec4 mClearColor{ 0.2f, 0.3f, 0.3f, 1.0f };
+    glm::vec4 mClearColor{ 0.15f, 0.15f, 0.15f, 1.0f };
 
     std::shared_ptr<Xenon::VertexBuffer> mVertexBuffer;
     std::shared_ptr<Xenon::IndexBuffer> mIndexBuffer;
     std::shared_ptr<Xenon::VertexArray> mVertexArray;
     std::shared_ptr<Xenon::Shader> mShader;
+
+    std::unique_ptr<Xenon::OrthographicCameraController> mCameraController;
 };
 XN_REGISTER_APPLICATION(Sandbox)
 

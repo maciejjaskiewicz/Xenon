@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Xenon/Graphics/GraphicsContext.hpp>
+#include <Graphics/API/GraphicsContext.hpp>
 
 struct GLFWwindow;
 

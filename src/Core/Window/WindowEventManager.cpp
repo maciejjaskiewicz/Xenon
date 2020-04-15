@@ -1,6 +1,6 @@
-#include <Xenon/Core/Window/WindowEventManager.hpp>
+#include <Core/Window/WindowEventManager.hpp>
 
-#include "../../Platform/GLFW/GLFWWindowEventManager.hpp"
+#include "Platform/GLFW/GLFWWindowEventManager.hpp"
 
 namespace Xenon
 {

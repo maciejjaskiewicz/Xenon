@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../Services/Event/Event.hpp"
-#include "../Input/KeyCode.hpp"
+#include "Xenon/Services/Event/Event.hpp"
+#include "Xenon/Core/Input/KeyCode.hpp"
 
 #include <fmt/format.h>
 

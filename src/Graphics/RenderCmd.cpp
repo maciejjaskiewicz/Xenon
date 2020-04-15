@@ -1,7 +1,7 @@
-#include <Xenon/Graphics/RenderCmd.hpp>
-#include <Xenon/Graphics/RendererAPI.hpp>
+#include <Graphics/RenderCmd.hpp>
 
-#include "../Core/InternalApplicationServices.hpp"
+#include <Graphics/API/RendererAPI.hpp>
+#include "Core/InternalApplicationServices.hpp"
 
 namespace Xenon
 {

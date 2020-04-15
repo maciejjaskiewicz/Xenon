@@ -1,7 +1,6 @@
 #pragma once
 
-#include <Xenon/Core/Window/WindowEventManager.hpp>
-
+#include <Core/Window/WindowEventManager.hpp>
 #include "GLFWWindow.hpp"
 
 namespace Xenon

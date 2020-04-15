@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Core/Api.hpp"
-#include "../Core/Window/WindowResolution.hpp"
+#include "Xenon/Core/Api.hpp"
+#include "Xenon/Core/Window/WindowResolution.hpp"
 
 #include <string>
 

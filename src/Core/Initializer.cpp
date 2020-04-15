@@ -1,15 +1,15 @@
-#include <Xenon/Core/Initializer.hpp>
+#include <Core/Initializer.hpp>
 
-#include <Xenon/Core.hpp>
-#include <Xenon/Services/Log/Logger.hpp>
-#include <Xenon/Services/Event/EventBus.hpp>
-#include <Xenon/Graphics/RendererAPI.hpp>
-#include <Xenon/Graphics/Renderer.hpp>
+#include <Core.hpp>
+#include <Services/Log/Logger.hpp>
+#include <Services/Event/EventBus.hpp>
+#include <Graphics/API/RendererAPI.hpp>
+#include <Graphics/Renderer.hpp>
 
 #include "InternalApplicationServices.hpp"
-#include "../Services/Log/InternalLogger.hpp"
-#include "../Services/Log/ConsoleLogSink.hpp"
-#include "../Services/Log/FileLogSink.hpp"
+#include "Services/Log/InternalLogger.hpp"
+#include "Services/Log/ConsoleLogSink.hpp"
+#include "Services/Log/FileLogSink.hpp"
 #include "Input/NullInput.hpp"
 
 namespace Xenon

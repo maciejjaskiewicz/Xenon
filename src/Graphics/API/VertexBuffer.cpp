@@ -1,6 +1,6 @@
-#include <Xenon/Graphics/VertexBuffer.hpp>
+#include <Graphics/API/VertexBuffer.hpp>
 
-#include "../Platform/OpenGL/OpenGLVertexBuffer.hpp"
+#include "Platform/OpenGL/OpenGLVertexBuffer.hpp"
 
 namespace Xenon
 {

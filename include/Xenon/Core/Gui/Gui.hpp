@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Api.hpp"
-#include "../Window/Window.hpp"
 #include "GuiStyle.hpp"
-#include "../../Config/ApplicationGuiConfiguration.hpp"
+#include "Xenon/Core/Api.hpp"
+#include "Xenon/Core/Window/Window.hpp"
+#include "Xenon/Config/ApplicationGuiConfiguration.hpp"
 
 namespace Xenon
 {

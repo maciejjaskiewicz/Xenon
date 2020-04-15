@@ -1,4 +1,4 @@
-#include <Xenon/Config/ApplicationWindowConfiguration.hpp>
+#include <Config/ApplicationWindowConfiguration.hpp>
 
 namespace Xenon
 {

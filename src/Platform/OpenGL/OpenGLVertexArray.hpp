@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Xenon/Graphics/VertexArray.hpp>
+#include <Graphics/API/VertexArray.hpp>
 
 namespace Xenon
 {

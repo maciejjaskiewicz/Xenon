@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Initializer.hpp"
-#include "../Config.hpp"
+#include "Xenon/Config.hpp"
 
 #include <memory>
 #include <functional>

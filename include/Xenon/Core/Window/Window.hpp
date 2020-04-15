@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Api.hpp"
-#include "../../Config/ApplicationWindowConfiguration.hpp"
+#include "Xenon/Core/Api.hpp"
+#include "Xenon/Config/ApplicationWindowConfiguration.hpp"
 
 #include <string>
 #include <memory>

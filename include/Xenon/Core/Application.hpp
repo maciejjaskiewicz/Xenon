@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../Config/ApplicationConfiguration.hpp"
+#include "Xenon/Config/ApplicationConfiguration.hpp"
 #include "ApplicationServices.hpp"
 #include "Window/Window.hpp"
 #include "Events/WindowEvent.hpp"
 #include "Gui/Gui.hpp"
-#include "../Utils/DeltaTime.hpp"
+#include "Xenon/Utils/DeltaTime.hpp"
 
 namespace Xenon
 {
@@ -26,7 +26,7 @@ namespace Xenon
         explicit Application(const ApplicationConfiguration&);
 
         virtual void update(const DeltaTime& deltaTime) = 0;
-        virtual void updateGui();
+        virtual void updateGui(const DeltaTime& deltaTime);
         virtual void onCloseEvent(const WindowCloseEvent&);
 
         std::unique_ptr<Window> mWindow;

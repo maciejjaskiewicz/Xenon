@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../Services/Event/Event.hpp"
-#include "../Input/MouseCode.hpp"
+#include "Xenon/Services/Event/Event.hpp"
+#include "Xenon/Core/Input/MouseCode.hpp"
 
 #include <fmt/format.h>
 

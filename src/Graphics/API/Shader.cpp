@@ -1,6 +1,6 @@
-#include <Xenon/Graphics/Shader.hpp>
+#include <Graphics/API/Shader.hpp>
 
-#include "../Platform/OpenGL/OpenGLShader.hpp"
+#include "Platform/OpenGL/OpenGLShader.hpp"
 
 namespace Xenon
 {

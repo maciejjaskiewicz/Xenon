@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Xenon/Core/Gui/Gui.hpp>
+#include <Core/Gui/Gui.hpp>
 
 namespace Xenon
 {

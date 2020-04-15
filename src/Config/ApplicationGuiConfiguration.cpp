@@ -1,4 +1,4 @@
-#include <Xenon/Config/ApplicationGuiConfiguration.hpp>
+#include <Config/ApplicationGuiConfiguration.hpp>
 
 namespace Xenon
 {

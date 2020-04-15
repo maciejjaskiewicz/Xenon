@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Xenon/Graphics/IndexBuffer.hpp>
+#include <Graphics/API/IndexBuffer.hpp>
 
 namespace Xenon
 {

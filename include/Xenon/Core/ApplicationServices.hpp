@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../Utils/ServiceLocator.hpp"
-#include "../Utils/ImmutableServiceLocator.hpp"
+#include "Xenon/Utils/ServiceLocator.hpp"
+#include "Xenon/Utils/ImmutableServiceLocator.hpp"
 
-#include "../Services/Event/EventBus.hpp"
+#include "Xenon/Services/Event/EventBus.hpp"
 
 namespace Xenon
 {

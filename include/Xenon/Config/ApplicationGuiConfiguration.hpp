@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Core/Api.hpp"
-#include "../Core/Gui/GuiStyle.hpp"
+#include "Xenon/Core/Api.hpp"
+#include "Xenon/Core/Gui/GuiStyle.hpp"
 
 namespace Xenon
 {

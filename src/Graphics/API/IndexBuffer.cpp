@@ -1,6 +1,6 @@
-#include <Xenon/Graphics/IndexBuffer.hpp>
+#include <Xenon/Graphics/API/IndexBuffer.hpp>
 
-#include "../Platform/OpenGL/OpenGLIndexBuffer.hpp"
+#include "Platform/OpenGL/OpenGLIndexBuffer.hpp"
 
 namespace Xenon
 {

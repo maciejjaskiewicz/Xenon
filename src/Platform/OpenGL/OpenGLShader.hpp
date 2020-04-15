@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Xenon/Graphics/Shader.hpp>
+#include <Graphics/API/Shader.hpp>
 
 namespace Xenon
 {

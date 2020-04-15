@@ -1,7 +1,7 @@
-#include <Xenon/Services/Log/Logger.hpp>
+#include <Services/Log/Logger.hpp>
 
 #include "InternalLogger.hpp"
-#include "../../Core/InternalApplicationServices.hpp"
+#include "Core/InternalApplicationServices.hpp"
 
 #include <spdlog/spdlog.h>
 #include <utility>

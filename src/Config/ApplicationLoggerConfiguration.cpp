@@ -1,4 +1,4 @@
-#include <Xenon/Config/ApplicationLoggerConfiguration.hpp>
+#include <Config/ApplicationLoggerConfiguration.hpp>
 
 namespace Xenon
 {

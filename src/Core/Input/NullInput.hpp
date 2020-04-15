@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Xenon/Core/Input/Input.hpp>
+#include <Core/Input/Input.hpp>
 
 namespace Xenon
 {

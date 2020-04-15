@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../Services/Event/Event.hpp"
-#include "../Window/WindowResolution.hpp"
+#include "Xenon/Services/Event/Event.hpp"
+#include "Xenon/Core/Window/WindowResolution.hpp"
 
 #include <fmt/format.h>
 

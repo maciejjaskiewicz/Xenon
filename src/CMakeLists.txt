@@ -39,7 +39,9 @@ source_group("Services\\Event" FILES ${XN_SOURCES_SERVICES_EVENT})
 source_group("Services\\Time" FILES ${XN_SOURCES_SERVICES_TIME})
 source_group("Platform\\GLFW" FILES ${XN_SOURCES_PLATFORM_GLFW})
 source_group("Platform\\OpenGL" FILES ${XN_SOURCES_PLATFORM_OPENGL})
-source_group("Graphics" FILES ${XN_SOURCES_GRAPHICS})
+source_group("Graphics" FILES ${XN_SOURCES_GRAPHICS_ROOT})
+source_group("Graphics\\API" FILES ${XN_SOURCES_GRAPHICS_API})
+source_group("Graphics\\Camera" FILES ${XN_SOURCES_GRAPHICS_CAMERA})
 
 # create library
 add_library(Xenon STATIC ${XN_INCLUDES} ${XN_SOURCES})
@@ -72,6 +74,7 @@ target_link_libraries_sys_public(Xenon
 # set include directories
 target_include_directories(Xenon PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories(Xenon PRIVATE ${PROJECT_SOURCE_DIR}/include/Xenon)
+target_include_directories(Xenon PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 # set extra definitions
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")

@@ -1,6 +1,11 @@
 #pragma once
 
-#include "VertexArray.hpp"
+#include "API/RendererAPIDetails.hpp"
+#include "API/VertexArray.hpp"
+#include "API/Shader.hpp"
+#include "Camera/Camera.hpp"
+
+#include <glm/glm.hpp>
 
 namespace Xenon
 {
@@ -10,8 +15,13 @@ namespace Xenon
         Renderer();
         void init();
 
-        void beginScene();
+        void beginScene(const Camera& camera);
         void endScene();
-        void submit(const std::weak_ptr<VertexArray>& vertexArray);
+        void submit(const std::weak_ptr<Shader>& shader, const std::weak_ptr<VertexArray>& vertexArray) const;
+
+        XN_NODISCARD const RendererAPIDetails& getDetails() const;
+    private:
+        glm::mat4 mViewProjectionMatrix{ 1.0f };
+        RendererAPIDetails mAPIDetails;
     };
 }

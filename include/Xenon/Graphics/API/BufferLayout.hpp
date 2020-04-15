@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Core/DataType.hpp"
+#include "Xenon/Core/DataType.hpp"
 
 namespace Xenon
 {

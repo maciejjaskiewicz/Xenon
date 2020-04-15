@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VertexArray.hpp"
+#include "API/VertexArray.hpp"
 #include <glm/glm.hpp>
 
 namespace Xenon

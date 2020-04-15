@@ -1,10 +1,9 @@
 #pragma once
 
-#include <Xenon/Core/Api.hpp>
-#include <Xenon/Core/Window/Window.hpp>
-#include <Xenon/Core/Window/WindowResolution.hpp>
-
-#include "../OpenGL/OpenGLContext.hpp"
+#include <Core/Api.hpp>
+#include <Core/Window/Window.hpp>
+#include <Core/Window/WindowResolution.hpp>
+#include "Platform/OpenGL/OpenGLContext.hpp"
 
 #include <string>
 
