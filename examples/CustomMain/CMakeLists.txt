@@ -11,4 +11,5 @@ target_link_libraries(CustomMain PRIVATE
     Xenon::Engine
 )
 
+set_custom_output(CustomMain)
 set_target_properties(CustomMain PROPERTIES FOLDER Examples)

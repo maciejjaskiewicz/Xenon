@@ -48,7 +48,7 @@ enable_sanitizers(XenonOptions)
 # fetch and configure third party libraries with Conan or FetchContent 
 include(Conan)
 conan_cmake_run(CONANFILE conanfile.txt
-    BASIC_SETUP CMAKE_TARGETS
+    BASIC_SETUP CMAKE_TARGETS NO_OUTPUT_DIRS
     BUILD missing
 )
 
@@ -57,6 +57,7 @@ SET(FETCHCONTENT_QUIET XENON_BUILD_VEROSE)
 
 include(FetchGLFW)
 include(FetchImGui)
+include(FetchStb)
 
 # add src
 add_subdirectory(src)

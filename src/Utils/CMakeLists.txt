@@ -7,5 +7,7 @@ set (XN_SOURCES_UTILS
     ${XN_INCROOT}/Delegate.hpp
     ${XN_SRCROOT}/DeltaTime.cpp
     ${XN_INCROOT}/DeltaTime.hpp
+    ${XN_INCROOT}/ResourceLoader.hpp
+    ${XN_INCROOT}/ResourceCache.hpp
     PARENT_SCOPE
 )

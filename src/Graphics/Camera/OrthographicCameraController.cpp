@@ -34,7 +34,7 @@ namespace Xenon
             if(mLocked) return;
 
             mZoomLevel -= event.yOffset * 0.25f;
-            mZoomLevel = std::max(mZoomLevel, 0.25f);
+            mZoomLevel = std::max(mZoomLevel, 0.1f);
             mCamera->setProjection(calculateCameraProjConfiguration());
         });
     }

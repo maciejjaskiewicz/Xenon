@@ -56,11 +56,11 @@ target_link_libraries(Xenon PRIVATE
     Xenon::Options
     Xenon::Warnings
     OpenGL::GL
-    
 )
 
 target_link_libraries_sys_private(Xenon
     glfw
+    stb
     CONAN_PKG::glad
 )
 

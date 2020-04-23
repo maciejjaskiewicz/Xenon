@@ -1,8 +1,10 @@
 #pragma once
 
 #include "Xenon/Core/Api.hpp"
+#include "Xenon/Utils/ResourceCache.hpp"
 
 #include <glm/glm.hpp>
+#include <utility>
 
 namespace Xenon
 {
@@ -24,5 +26,25 @@ namespace Xenon
 
         XN_NODISCARD static std::shared_ptr<Shader> create(
             const std::string& vertexSrc, const std::string& fragmentSrc);
+    };
+
+    struct ShaderLoaderArgs : ResourceLoaderArgs
+    {
+        std::string vertexShaderPath;
+        std::string fragmentShaderPath;
+
+        ShaderLoaderArgs() = default;
+        ShaderLoaderArgs(std::string vertexShaderPath, std::string fragmentShaderPath)
+            : vertexShaderPath(std::move(vertexShaderPath)),
+              fragmentShaderPath(std::move(fragmentShaderPath))
+        {  }
+    };
+
+    class ShaderLoader final : public ResourceLoader<Shader, ShaderLoaderArgs>
+    {
+    public:
+        XN_NODISCARD std::shared_ptr<Shader> load() const override;
+    private:
+        XN_NODISCARD std::string readShaderFile(const std::string& path) const;
     };
 }

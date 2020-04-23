@@ -28,6 +28,9 @@ set (XN_SOURCES_GRAPHICS_API_L
     ${XN_INCROOT}/API/VertexArray.hpp
     ${XN_SRCROOT}/API/Shader.cpp
     ${XN_INCROOT}/API/Shader.hpp
+    ${XN_INCROOT}/API/Texture.hpp
+    ${XN_SRCROOT}/API/Texture2D.cpp
+    ${XN_INCROOT}/API/Texture2D.hpp
     ${XN_SRCROOT}/API/RendererAPI.cpp
     ${XN_INCROOT}/API/RendererAPI.hpp
     ${XN_INCROOT}/API/RendererAPIDetails.hpp

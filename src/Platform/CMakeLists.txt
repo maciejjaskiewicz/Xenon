@@ -28,6 +28,8 @@ set (XN_SOURCES_PLATFORM_OPENGL_L
     ${XN_SRCROOT}/OpenGL/OpenGLVertexArray.hpp
     ${XN_SRCROOT}/OpenGL/OpenGLShader.cpp
     ${XN_SRCROOT}/OpenGL/OpenGLShader.hpp
+    ${XN_SRCROOT}/OpenGL/OpenGLTexture2D.cpp
+    ${XN_SRCROOT}/OpenGL/OpenGLTexture2D.hpp
     ${XN_SRCROOT}/OpenGL/OpenGLRendererAPI.cpp
     ${XN_SRCROOT}/OpenGL/OpenGLRendererAPI.hpp
 )

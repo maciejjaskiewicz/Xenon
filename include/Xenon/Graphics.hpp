@@ -5,6 +5,7 @@
 #include "Graphics/API/IndexBuffer.hpp"
 #include "Graphics/API/VertexArray.hpp"
 #include "Graphics/API/Shader.hpp"
+#include "Graphics/API/Texture2D.hpp"
 #include "Graphics/RenderCmd.hpp"
 #include "Graphics/Renderer.hpp"
 #include "Graphics/Camera/Camera.hpp"

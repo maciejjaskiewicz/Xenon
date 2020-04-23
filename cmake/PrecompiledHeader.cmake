@@ -2,7 +2,6 @@ function(set_standard_pch project_name)
 
     set(STD_PCH_HEADERS
         <cstdint>
-        <chrono>
         <string>
         <sstream>
         <memory>
