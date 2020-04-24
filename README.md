@@ -29,3 +29,4 @@ cmake --build .
 * [glad](https://github.com/Dav1dde/glad): Meta loader for OpenGL API.
 * [glm](https://github.com/g-truc/glm): Header only C++ mathematics library.
 * [imgui](https://github.com/ocornut/imgui): Dear ImGui: Bloat-free Immediate Mode Graphical User interface for C++.
+* [stb](https://github.com/nothings/stb): Single-file public domain libraries for C/C++.
