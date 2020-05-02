@@ -25,6 +25,8 @@ namespace Xenon
     protected:
         explicit Application(const ApplicationConfiguration&);
 
+        virtual void init();
+
         virtual void update(const DeltaTime& deltaTime) = 0;
         virtual void updateGui(const DeltaTime& deltaTime);
         virtual void onCloseEvent(const WindowCloseEvent&);

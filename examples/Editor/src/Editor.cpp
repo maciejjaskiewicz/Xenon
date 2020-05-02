@@ -20,6 +20,11 @@ public:
             }
         });
 
+        setStyle();
+    }
+
+    void init() override
+    {
         mFrameBuffer = Xenon::FrameBuffer::create(640, 480);
 
         float vertices[3 * 3] = {
@@ -47,11 +52,9 @@ public:
             "assets/shaders/FlatColorFragment.glsl"
         ));
 
-        mCamera = std::make_shared<Xenon::OrthographicCamera>(Xenon::OrthographicCameraProjConfiguration {
+        mCamera = std::make_shared<Xenon::OrthographicCamera>(Xenon::OrthographicCameraProjConfiguration{
             -1.0f, 1.0f, -1.0f, 1.0f
         });
-
-        setStyle();
     }
 
     void update(const Xenon::DeltaTime& deltaTime) override
@@ -111,9 +114,9 @@ public:
 
         auto* texturePtr =  reinterpret_cast<void*>(static_cast<intptr_t>(mFrameBuffer->texture().id()));
         const auto textureWidth = static_cast<float>(mFrameBuffer->texture().width());
-        const auto texturheight = static_cast<float>(mFrameBuffer->texture().height());
+        const auto textureHeight = static_cast<float>(mFrameBuffer->texture().height());
 
-        ImGui::GetWindowDrawList()->AddImage(texturePtr, pos, ImVec2(pos.x + textureWidth, texturheight),
+        ImGui::GetWindowDrawList()->AddImage(texturePtr, pos, ImVec2(pos.x + textureWidth, pos.y + textureHeight),
             ImVec2(0, 1), ImVec2(1, 0));
 
         ImGui::End();

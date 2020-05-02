@@ -13,8 +13,6 @@ public:
     explicit Sandbox(const Xenon::ApplicationConfiguration& config)
         : Application(config)
     {
-        XN_INFO("{} initialized", "Sandbox");
-
         Services::EventBus::ref().subscribe<Xenon::KeyReleasedEvent>(
             [this](const Xenon::KeyReleasedEvent& event)
         {
@@ -24,7 +22,10 @@ public:
                 mRunning = false;
             }
         });
+    }
 
+    void init() override
+    {
         mVertexArray = Xenon::VertexArray::create();
 
         float vertices[4 * 5] =
@@ -43,7 +44,7 @@ public:
         };
         mVertexBuffer->setLayout(layout);
 
-        uint32_t indices[2 * 3] = 
+        uint32_t indices[2 * 3] =
         {
             0, 1, 2,
             2, 1, 3
@@ -56,12 +57,14 @@ public:
         mTextureCache.set<Xenon::Texture2DLoader>("world", Xenon::Texture2DLoaderArgs(
             "assets/textures/world.png"));
         mShaderCache.set<Xenon::ShaderLoader>("texture", Xenon::ShaderLoaderArgs(
-            "assets/shaders/TextureVertex.glsl", 
+            "assets/shaders/TextureVertex.glsl",
             "assets/shaders/TextureFragment.glsl"));
 
         mCameraController = std::make_unique<Xenon::OrthographicCameraController>(
-            config.windowConfiguration.resolution().aspectRatio(), true
+            mWindow->resolution().aspectRatio(), true
         );
+
+        XN_INFO("Sandbox initialized");
     }
 
     void update(const Xenon::DeltaTime& deltaTime) override

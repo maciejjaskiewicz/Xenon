@@ -38,6 +38,8 @@ namespace Xenon
 
     void Application::run()
     {
+        init();
+
         DeltaTime deltaTime(Services::Timer::ref().elapsed());
 
         while (mRunning)
@@ -57,6 +59,9 @@ namespace Xenon
             mWindow->update();
         }
     }
+
+    void Application::init()
+    { }
 
     void Application::updateGui(const DeltaTime& deltaTime)
     { }
