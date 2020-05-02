@@ -1,2 +1,3 @@
 add_subdirectory(Sandbox)
 add_subdirectory(CustomMain)
+add_subdirectory(Editor)

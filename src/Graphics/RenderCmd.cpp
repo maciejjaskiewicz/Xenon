@@ -15,7 +15,7 @@ namespace Xenon
         InternalApplicationServices::RendererAPI::ref().clear();
     }
 
-    void RenderCmd::draw(const std::weak_ptr<VertexArray>& vertexArray)
+    void RenderCmd::draw(const std::shared_ptr<VertexArray>& vertexArray)
     {
         InternalApplicationServices::RendererAPI::ref().draw(vertexArray);
     }

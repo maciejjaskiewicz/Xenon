@@ -7,6 +7,7 @@ namespace Xenon
     static constexpr GLenum toGlFormat(const TextureFormat format);
     static constexpr GLenum toGlInternalFormat(const TextureFormat format);
     static constexpr GLenum toGlFilter(const TextureFilter filter);
+    static constexpr GLenum toGlWrap(const TextureWrap wrap);
 
     OpenGLTexture2D::OpenGLTexture2D(const void* pixels, const Texture2DConfiguration& configuration)
         : mConfiguration(configuration)
@@ -35,8 +36,8 @@ namespace Xenon
         glGenTextures(1, &mTextureId);
         glBindTexture(GL_TEXTURE_2D, mTextureId);
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, toGlWrap(mConfiguration.wrap));
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, toGlWrap(mConfiguration.wrap));
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, toGlFilter(mConfiguration.minFilter));
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, toGlFilter(mConfiguration.maxFilter));
@@ -48,7 +49,7 @@ namespace Xenon
         glBindTexture(GL_TEXTURE_2D, mTextureId);
     }
 
-    void OpenGLTexture2D::setData(const void* pixels)
+    void OpenGLTexture2D::setData(const void* pixels, const bool generateMipmap)
     {
         const auto dataFormat = toGlFormat(mConfiguration.format);
         const auto internalFormat = toGlInternalFormat(mConfiguration.format);
@@ -57,7 +58,14 @@ namespace Xenon
 
         glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, mConfiguration.width, mConfiguration.height, 0, 
             dataFormat, GL_UNSIGNED_BYTE, pixels);
-        glGenerateMipmap(GL_TEXTURE_2D);
+
+        if(generateMipmap)
+            glGenerateMipmap(GL_TEXTURE_2D);
+    }
+
+    uint32_t OpenGLTexture2D::id() const
+    {
+        return mTextureId;
     }
 
     uint32_t OpenGLTexture2D::width() const
@@ -70,7 +78,7 @@ namespace Xenon
         return mConfiguration.height;
     }
 
-    static constexpr GLenum toGlFormat(const TextureFormat format)
+    constexpr GLenum toGlFormat(const TextureFormat format)
     {
         switch (format)
         {
@@ -92,12 +100,25 @@ namespace Xenon
         return 0;
     }
 
-    static constexpr GLenum toGlFilter(const TextureFilter filter)
+    constexpr GLenum toGlFilter(const TextureFilter filter)
     {
         switch (filter)
         {
             case TextureFilter::LINEAR: return GL_LINEAR;
             case TextureFilter::NEAREST: return GL_NEAREST;
+        }
+
+        return 0;
+    }
+
+    constexpr GLenum toGlWrap(const TextureWrap wrap)
+    {
+        switch (wrap)
+        {
+            case TextureWrap::REPEAT: return GL_REPEAT;
+            case TextureWrap::MIRRORED_REPEAT: return GL_MIRRORED_REPEAT;
+            case TextureWrap::CLAMP_TO_EDGE: return GL_CLAMP_TO_EDGE;
+            case TextureWrap::CLAMP_TO_BORDER: return GL_CLAMP_TO_BORDER;
         }
 
         return 0;

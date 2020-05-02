@@ -12,17 +12,20 @@ namespace Xenon
         TextureFormat format;
         TextureFilter minFilter;
         TextureFilter maxFilter;
+        TextureWrap wrap;
 
         Texture2DConfiguration(const uint32_t width, const uint32_t height, const TextureFormat format, 
-            const TextureFilter minFilter = TextureFilter::LINEAR, const TextureFilter maxFilter = TextureFilter::NEAREST)
-            : width(width), height(height), format(format), minFilter(minFilter), maxFilter(maxFilter)
+            const TextureFilter minFilter = TextureFilter::LINEAR, const TextureFilter maxFilter = TextureFilter::NEAREST,
+            const TextureWrap wrap = TextureWrap::REPEAT)
+            : width(width), height(height), format(format), minFilter(minFilter), maxFilter(maxFilter),
+              wrap(wrap)
         { }
     };
 
     class Texture2D : public Texture
     {
     public:
-        virtual void setData(const void* pixels) = 0;
+        virtual void setData(const void* pixels, bool generateMipmap = true) = 0;
 
         static std::shared_ptr<Texture2D> create(const void* pixels, const Texture2DConfiguration& configuration);
         static std::shared_ptr<Texture2D> create(const Texture2DConfiguration& configuration);

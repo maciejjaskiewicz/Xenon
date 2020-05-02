@@ -22,14 +22,9 @@ namespace Xenon
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    void OpenGLRendererAPI::draw(const std::weak_ptr<VertexArray> vertexArray)
+    void OpenGLRendererAPI::draw(const std::shared_ptr<VertexArray>& vertexArray)
     {
-        XN_ASSERT(!vertexArray.expired());
-
-        if(const auto sVertexArray = vertexArray.lock())
-        {
-            glDrawElements(GL_TRIANGLES, sVertexArray->indexBuffer().count(), GL_UNSIGNED_INT, nullptr);
-        }
+        glDrawElements(GL_TRIANGLES, vertexArray->indexBuffer().count(), GL_UNSIGNED_INT, nullptr);
     }
 
     void OpenGLRendererAPI::setViewport(const uint32_t x, const uint32_t y, 

@@ -109,10 +109,10 @@ public:
         ImGui::Separator();
 
         ImGui::ColorEdit4("Clear Color", glm::value_ptr(mClearColor));
-        /*if(!mShowImGuiDemo)
+        if(!mShowImGuiDemo)
         {
             mShowImGuiDemo = ImGui::Button("Run ImGui demo", ImVec2(200, 30));
-        }*/
+        }
 
         ImGui::End();
 
@@ -146,7 +146,7 @@ void Xenon::configureApplication(IApplicationBuilder<Sandbox>& applicationBuilde
         cfg.setTitle("Sandbox application");
         cfg.maximize(false);
         cfg.setResolution(StandardWindowResolution::A_16X9_R_1280X720);
-        cfg.setVSync(true);
+        cfg.setVSync(false);
     });
 
     applicationBuilder.configureApplicationLogger([](ApplicationLoggerConfiguration& cfg)

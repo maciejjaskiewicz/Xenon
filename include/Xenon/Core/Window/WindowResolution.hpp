@@ -8,6 +8,9 @@ namespace Xenon
 {
     struct WindowResolution
     {
+        uint32_t width;
+        uint32_t height;
+
         explicit WindowResolution(const uint32_t windowWidth = 1280,
             const uint32_t windowHeight = 720) : width(windowWidth), height(windowHeight)
         { }
@@ -18,9 +21,19 @@ namespace Xenon
             return static_cast<float>(width) / static_cast<float>(height);
         }
 
-        uint32_t width;
-        uint32_t height;
+        friend bool operator== (const WindowResolution& lhs, const WindowResolution& rhs);
+        friend bool operator!= (const WindowResolution& lhs, const WindowResolution& rhs);
     };
+
+    inline bool operator==(const WindowResolution& lhs, const WindowResolution& rhs)
+    {
+        return lhs.width == rhs.width && lhs.height == rhs.height;
+    }
+
+    inline bool operator!=(const WindowResolution& lhs, const WindowResolution& rhs)
+    {
+        return !(lhs == rhs);
+    }
 
     /*
      *  Convention:

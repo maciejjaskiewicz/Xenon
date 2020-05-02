@@ -53,7 +53,9 @@ conan_cmake_run(CONANFILE conanfile.txt
 )
 
 include(FetchContent)
-SET(FETCHCONTENT_QUIET XENON_BUILD_VEROSE)
+if(XENON_BUILD_VEROSE)
+    SET(FETCHCONTENT_QUIET OFF)
+endif()
 
 include(FetchGLFW)
 include(FetchImGui)

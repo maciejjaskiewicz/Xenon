@@ -15,8 +15,9 @@ namespace Xenon
         void init();
 
         void bind(uint32_t slot) override;
-        void setData(const void* pixels) override;
+        void setData(const void* pixels, bool generateMipmap = true) override;
 
+        XN_NODISCARD uint32_t id() const override;
         XN_NODISCARD uint32_t width() const override;
         XN_NODISCARD uint32_t height() const override;
     private:

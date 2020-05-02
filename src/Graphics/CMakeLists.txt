@@ -26,6 +26,8 @@ set (XN_SOURCES_GRAPHICS_API_L
     ${XN_INCROOT}/API/IndexBuffer.hpp
     ${XN_SRCROOT}/API/VertexArray.cpp
     ${XN_INCROOT}/API/VertexArray.hpp
+    ${XN_SRCROOT}/API/FrameBuffer.cpp
+    ${XN_INCROOT}/API/FrameBuffer.hpp
     ${XN_SRCROOT}/API/Shader.cpp
     ${XN_INCROOT}/API/Shader.hpp
     ${XN_INCROOT}/API/Texture.hpp

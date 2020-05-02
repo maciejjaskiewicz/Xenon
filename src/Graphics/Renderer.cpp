@@ -32,19 +32,15 @@ namespace Xenon
     {
     }
 
-    void Renderer::submit(const std::weak_ptr<Shader>& shader, const std::weak_ptr<VertexArray>& vertexArray) const
+    void Renderer::submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray,
+        const glm::mat4& transform) const
     {
-        const auto sShader = shader.lock();
-        const auto sVertexArray = vertexArray.lock();
+        shader->bind();
+        shader->setMat4("uViewProjection", mViewProjectionMatrix);
+        shader->setMat4("uTransform", transform);
 
-        if(sShader && sVertexArray)
-        {
-            sShader->bind();
-            sShader->setMat4("uViewProjection", mViewProjectionMatrix);
-
-            sVertexArray->bind();
-            RenderCmd::draw(vertexArray);
-        }
+        vertexArray->bind();
+        RenderCmd::draw(vertexArray);
     }
 
     XN_NODISCARD const RendererAPIDetails& Renderer::getDetails() const
