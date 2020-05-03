@@ -27,6 +27,13 @@ namespace Xenon
             bind<TFunction>();
         }
 
+        template<typename TInvokable>
+        Delegate(TInvokable invokable) noexcept
+            : Delegate{}
+        {
+            bind<TInvokable>(invokable);
+        }
+
         template<auto TFunction>
         void bind() noexcept
         {   
