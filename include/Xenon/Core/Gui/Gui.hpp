@@ -5,6 +5,8 @@
 #include "Xenon/Core/Window/Window.hpp"
 #include "Xenon/Config/ApplicationGuiConfiguration.hpp"
 
+struct ImFont;
+
 namespace Xenon
 {
     struct GuiConfiguration
@@ -27,6 +29,8 @@ namespace Xenon
         virtual void init() = 0;
         virtual void newFrame() const = 0;
         virtual void render() const = 0;
+
+        virtual void setFont(ImFont* font) = 0;
 
         XN_NODISCARD static std::unique_ptr<Gui> create(Window& window, 
             const GuiConfiguration& guiConfiguration);

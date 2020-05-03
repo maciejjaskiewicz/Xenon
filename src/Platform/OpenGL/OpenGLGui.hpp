@@ -13,6 +13,8 @@ namespace Xenon
         void init() override;
         void newFrame() const override;
         void render() const override;
+
+        void setFont(ImFont* font) override;
     private:
         Window& mWindow;
         GuiStyle mStyle;
@@ -20,5 +22,8 @@ namespace Xenon
         bool mViewports;
 
         bool mInitialized{ false };
+
+        ImFont* mDefaultFont{ nullptr };
+        ImFont* mCurrentFont{ nullptr };
     };
 }

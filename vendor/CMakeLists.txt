@@ -1,0 +1,2 @@
+add_subdirectory(ImGuiFileDialog)
+set_target_properties(ImGuiFileDialog PROPERTIES FOLDER Vendor)

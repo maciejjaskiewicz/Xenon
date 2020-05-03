@@ -30,3 +30,4 @@ cmake --build .
 * [glm](https://github.com/g-truc/glm): Header only C++ mathematics library.
 * [imgui](https://github.com/ocornut/imgui): Dear ImGui: Bloat-free Immediate Mode Graphical User interface for C++.
 * [stb](https://github.com/nothings/stb): Single-file public domain libraries for C/C++.
+* [ImGuiFileDialog](https://github.com/aiekick/ImGuiFileDialog): File Dialog for ImGui.

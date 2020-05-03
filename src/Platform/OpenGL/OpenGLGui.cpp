@@ -4,6 +4,8 @@
 
 #include "OpenGLGui.hpp"
 
+#include <ImGuiFileDialogIcons.cpp>
+
 namespace Xenon
 {
     OpenGLGui::OpenGLGui(Window& window, const GuiConfiguration& guiConfiguration)
@@ -44,6 +46,9 @@ namespace Xenon
         ImGui_ImplGlfw_InitForOpenGL(glfwWindow, true);
         ImGui_ImplOpenGL3_Init("#version 410");
 
+        mDefaultFont = io.Fonts->AddFontDefault();
+        setFont(mDefaultFont);
+
         mInitialized = true;
         XN_ENG_DEBUG("ImGui successfully initialized");
     }
@@ -65,11 +70,15 @@ namespace Xenon
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+
+        ImGui::PushFont(mCurrentFont);
     }
 
     void OpenGLGui::render() const
     {
         XN_ASSERT_COM(mInitialized, "GUI is uninitialized!");
+
+        ImGui::PopFont();
 
         auto& io = ImGui::GetIO();
 
@@ -91,5 +100,16 @@ namespace Xenon
 
             glfwMakeContextCurrent(backupCurrentContext);
         }
+    }
+
+    void OpenGLGui::setFont(ImFont* font)
+    {
+        auto& io = ImGui::GetIO();
+
+        mCurrentFont = font;
+
+        static const ImWchar ICONS_RANGES[] = { ICON_MIN_IMFDLG, ICON_MAX_IMFDLG, 0 };
+        ImFontConfig iconsConfig; iconsConfig.MergeMode = true; iconsConfig.PixelSnapH = true;
+        io.Fonts->AddFontFromMemoryCompressedBase85TTF(FONT_ICON_BUFFER_NAME_IMFDLG, 15.0f, &iconsConfig, ICONS_RANGES);
     }
 }

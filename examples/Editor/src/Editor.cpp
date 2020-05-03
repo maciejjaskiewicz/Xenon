@@ -1,8 +1,10 @@
 #include <Xenon/Xenon.hpp>
 #include <Xenon/Graphics.hpp>
 
-#include "imgui.h"
-#include "imgui_internal.h"
+#include <imgui.h>
+#include <imgui_internal.h>
+
+#include <ImGuiFileDialog.hpp>
 
 class EditorApp final : public Xenon::Application
 {
@@ -127,6 +129,17 @@ public:
         ImGui::ShowDemoWindow();
 
         endDockSpace();
+
+        if (igfd::ImGuiFileDialog::Instance()->FileDialog("ChooseFileDlgKey"))
+        {
+            if (igfd::ImGuiFileDialog::Instance()->IsOk == true)
+            {
+                std::string filePathName = igfd::ImGuiFileDialog::Instance()->GetFilepathName();
+                std::string filePath = igfd::ImGuiFileDialog::Instance()->GetCurrentPath();
+            }
+
+            igfd::ImGuiFileDialog::Instance()->CloseDialog("ChooseFileDlgKey");
+        }
     }
 
 
@@ -215,7 +228,10 @@ private:
             if (ImGui::BeginMenu("File"))
             {
                 ImGui::MenuItem("Exit");
-                ImGui::MenuItem("Open File");
+                if(ImGui::MenuItem("Open File"))
+                {
+                    igfd::ImGuiFileDialog::Instance()->OpenModal("ChooseFileDlgKey", "Choose File", ".cpp\0.h\0.hpp\0\0", ".");
+                }
                 ImGui::EndMenu();
             }
 
@@ -237,11 +253,12 @@ private:
         ImGui::PopStyleVar();
     }
 
-    static void setStyle()
+    void setStyle() const
     {
         auto& io = ImGui::GetIO();
 
-        io.Fonts->AddFontFromFileTTF("assets/fonts/Ruda-SemiBold.ttf", 15.0f, nullptr, io.Fonts->GetGlyphRangesCyrillic());
+        auto font = io.Fonts->AddFontFromFileTTF("assets/fonts/Ruda-Bold.ttf", 15.0f);
+        mGui->setFont(font);
 
         ImGui::GetStyle().FrameRounding = 4.0f;
         ImGui::GetStyle().GrabRounding = 4.0f;

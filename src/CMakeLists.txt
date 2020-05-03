@@ -69,6 +69,7 @@ target_link_libraries_sys_public(Xenon
     CONAN_PKG::spdlog
     CONAN_PKG::glm
     ImGui
+    ImGuiFileDialog
 )
 
 # set include directories
