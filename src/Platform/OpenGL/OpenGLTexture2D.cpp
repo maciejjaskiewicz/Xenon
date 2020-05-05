@@ -61,6 +61,8 @@ namespace Xenon
 
         if(generateMipmap)
             glGenerateMipmap(GL_TEXTURE_2D);
+
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 
     uint32_t OpenGLTexture2D::id() const
