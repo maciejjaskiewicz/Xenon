@@ -9,11 +9,11 @@ namespace Xenon
     static constexpr GLenum toGlFilter(const TextureFilter filter);
     static constexpr GLenum toGlWrap(const TextureWrap wrap);
 
-    OpenGLTexture2D::OpenGLTexture2D(const void* pixels, const Texture2DConfiguration& configuration)
+    OpenGLTexture2D::OpenGLTexture2D(const void* pixels, const Texture2DConfiguration& configuration, const int byteAlignment)
         : mConfiguration(configuration)
     {
         init();
-        setData(pixels);
+        setData(pixels, true, byteAlignment);
 
         glBindTexture(GL_TEXTURE_2D, 0);
     }
@@ -49,12 +49,14 @@ namespace Xenon
         glBindTexture(GL_TEXTURE_2D, mTextureId);
     }
 
-    void OpenGLTexture2D::setData(const void* pixels, const bool generateMipmap)
+    void OpenGLTexture2D::setData(const void* pixels, const bool generateMipmap, const int byteAlignment)
     {
         const auto dataFormat = toGlFormat(mConfiguration.format);
         const auto internalFormat = toGlInternalFormat(mConfiguration.format);
 
         glBindTexture(GL_TEXTURE_2D, mTextureId);
+
+        glPixelStorei(GL_UNPACK_ALIGNMENT, byteAlignment);
 
         glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, mConfiguration.width, mConfiguration.height, 0, 
             dataFormat, GL_UNSIGNED_BYTE, pixels);

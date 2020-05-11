@@ -7,9 +7,9 @@
 
 namespace Xenon
 {
-    std::shared_ptr<Texture2D> Texture2D::create(const void* pixels, const Texture2DConfiguration& configuration)
+    std::shared_ptr<Texture2D> Texture2D::create(const void* pixels, const Texture2DConfiguration& configuration, const int byteAlignment)
     {
-        return std::make_shared<OpenGLTexture2D>(pixels, configuration);
+        return std::make_shared<OpenGLTexture2D>(pixels, configuration, byteAlignment);
     }
 
     std::shared_ptr<Texture2D> Texture2D::create(const Texture2DConfiguration& configuration)

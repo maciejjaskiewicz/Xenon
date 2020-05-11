@@ -25,9 +25,9 @@ namespace Xenon
     class Texture2D : public Texture
     {
     public:
-        virtual void setData(const void* pixels, bool generateMipmap = true) = 0;
+        virtual void setData(const void* pixels, bool generateMipmap = true, int byteAlignment = 4) = 0;
 
-        static std::shared_ptr<Texture2D> create(const void* pixels, const Texture2DConfiguration& configuration);
+        static std::shared_ptr<Texture2D> create(const void* pixels, const Texture2DConfiguration& configuration, int byteAlignment = 4);
         static std::shared_ptr<Texture2D> create(const Texture2DConfiguration& configuration);
     };
 
