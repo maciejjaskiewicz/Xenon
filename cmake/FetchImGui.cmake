@@ -1,7 +1,7 @@
 FetchContent_Declare(
   ImGui
   GIT_REPOSITORY https://github.com/maciejjaskiewicz/imgui.git
-  GIT_TAG origin/docking
+  GIT_TAG origin/docking_tables
 )
 
 FetchContent_MakeAvailable(ImGui)
